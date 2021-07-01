@@ -66,7 +66,7 @@ class ValidarAlumno extends React.Component {
             return (
                 <React.Fragment>
                     <button className="btn" onClick={this.checkUsuario}>Validar</button>
-                    <button  id="btn_delete" onClick={this.delete}>Denegar</button>
+                    <button  className="btnCancel" onClick={this.delete}>Denegar</button>
                 </React.Fragment>
             );
         }

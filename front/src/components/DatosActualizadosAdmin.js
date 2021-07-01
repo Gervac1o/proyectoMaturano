@@ -126,7 +126,7 @@ class DatosActualizadosAdmin extends React.Component {
                                 }
                             })()}
                     </div>
-                    <br/> <br/> <br/>
+                    <br/>
                     <button  className = "btn" onClick = {this.saveAdmin}>Aceptar</button>
                     <button  className ="btnCancel" onClick={cancel} >Cancelar</button>
                     </div>

@@ -5,8 +5,6 @@ class RecuperacionContraseña extends React.Component{
 
     cambioRef = React.createRef();
 
-
-
     state = {
         alumno:{},
         recuperar:{},

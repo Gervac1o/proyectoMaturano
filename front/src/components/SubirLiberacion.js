@@ -89,6 +89,7 @@ class SubirLiberacion extends React.Component {
                         <strong>DOCUMENTACIÓN LIBERACIÓN EXTEMPORANEA</strong>
                                 <div>
                                 <br/>
+                                <table>
                                     <tbody>
                                         <tr>
                                             <td className="table_lista, table_title"><strong>Archivo</strong></td>
@@ -111,6 +112,7 @@ class SubirLiberacion extends React.Component {
                                             </tr>
                                     </tbody>
                                     )}
+                                    </table>
                                      <br/>
                                      <br/>
                                     <div  >

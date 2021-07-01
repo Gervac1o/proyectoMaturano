@@ -70,7 +70,7 @@ class Dictamen extends React.Component {
     saveDictamen = async (e) => {
         this.changeState();
         //alert(this.state.idAlumno)
-        if(this.state.dictamen.porcentajeCreditos && this.state.dictamen.porcentajeCreditos !== null && this.state.dictamen.porcentajeCreditos !== undefined){
+        if(this.state.dictamen.porcentajeCreditos > 67 && this.state.dictamen.porcentajeCreditos < 70){
          await axios.post("user/dictamen/save", this.state.dictamen)
             .then(res => {
                 this.setState(
@@ -105,6 +105,7 @@ class Dictamen extends React.Component {
                                 <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>
                                      
                             </div>
+                            <br></br>
                             {(() => {
                                 switch(this.state.estado){
                                     case "NUEVO":

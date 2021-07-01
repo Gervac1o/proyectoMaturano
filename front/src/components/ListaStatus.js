@@ -30,6 +30,7 @@ render() {
         <React.Fragment>
             <DirectorioAdmin />
             <h1><strong>Alumnos esperando Validación</strong></h1>
+            <table>
                 <tbody>
                     <tr >
                         <th className="table_lista, table_title">Correo</th>
@@ -52,6 +53,7 @@ render() {
                     </tbody>
                     )
                 }
+            </table>
         </React.Fragment>
     );
     }else if(this.state.usuarios.length === 0 && this.state.status === 'success'){

@@ -8,11 +8,9 @@ const cookies = new Cookies();
 
 class AdminDictamenArchivos extends React.Component {
 
-
     estadoRef = React.createRef();
-    
-
     comentarioRef = React.createRef();
+    eliminarRef = React.createRef();
 
     state = {
         idAlumno: this.props.id,
@@ -30,7 +28,8 @@ class AdminDictamenArchivos extends React.Component {
         cambioEstado: {},
         
         statusEstado: null,
-        comentario: {}
+        comentario: {},
+        statusEliminar: null
     };
 
     componentWillMount = () => {
@@ -80,12 +79,33 @@ class AdminDictamenArchivos extends React.Component {
            
     }//Fin de getAlumno()
 
+    statusDelete = () => {
+        this.setState({
+            statusEliminar: this.eliminarRef.current.value
+        })
+    }//Fin de Status Delete
+
     deleteDictamen = () => {
-        axios.delete("user/dictamen/delete/" + this.props.id)
-            .then(res => {
+        if(this.state.statusEliminar === "true"){
+            try{
+                axios.delete("user/dictamen/delete/" + this.props.id)
+                .then(res => {
                 window.location.reload()
-            })
-    }//Fin de deleteDictamen
+                });
+            }
+            finally{
+                this.setState({
+                    statusEliminar: "false"
+                })
+            }//Fin de finally
+        }
+    else{
+        this.setState({
+            statusEliminar: "false"
+        });
+        }//Fin de else
+     
+}//Fin de deleteDictamen
 
     changeState = () => {
       
@@ -250,7 +270,7 @@ class AdminDictamenArchivos extends React.Component {
                                         }
                                         })()}
                                         </div>
-                                        <strong>cambiar estado de la revision</strong>
+                                        <strong>Cambiar estado de la revisión:</strong>
                                         <div className="center">
                                             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                                                 <option value=""></option>
@@ -263,8 +283,28 @@ class AdminDictamenArchivos extends React.Component {
                                             <br />
                                         </div>
                                         <br />
-                                       {/**  <button id="btn_deleteRegistro" onClick={this.deleteDictamen}>Borrar Registro</button>
-                                    */}
+                                        <div className="center">
+                                            <select name="eliminar" ref={this.eliminarRef} onChange={this.statusDelete}>
+                                            <option value="false">NO</option>
+                                            <option value="true">SI</option>
+                                            </select>
+                                        {(() => {
+                                        switch(this.state.statusEliminar){   
+                                            case "false":
+                                            return (
+                                            <a className="warning_search">¡Seleccione "SI" para eliminar alumno!</a>
+                                            );
+                                            break;
+                                            default:
+                                                return(
+                                                    <a className="warning_search">¡Por seguridad antes de eliminar el registro, no debe tener documentos almacenados!</a>
+                                                )
+                                                break;
+                                        }
+                                        })()}
+                                    <button id="btn_delete" onClick={this.deleteDictamen}>Eliminar</button>
+                                    <br />
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -272,6 +312,7 @@ class AdminDictamenArchivos extends React.Component {
                         </div>
                         <div>
                                  <br />
+                            <table>
                             <tbody>
                                 <tr>
                                     <td className="table_lista, table_title"><strong>Documentos</strong></td>
@@ -305,6 +346,7 @@ class AdminDictamenArchivos extends React.Component {
                                     </tr>
                                 </tbody>
                             )}
+                            </table>
                             <br />
                             <div  className="archivosAdminCenter" ><strong>Enviar archivo PDF</strong></div> <br /> 
                             <input type="file" name="file" onChange={this.fileChange} />
