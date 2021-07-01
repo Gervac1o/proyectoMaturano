@@ -56,7 +56,8 @@ class BuscarBoleta extends React.Component {
                 <div className="center">
                     <DirectorioAdmin />
                             <div className="form-group" >
-                                <label htmlFor="nombre" className="text_login">Buscar por Boleta</label>
+                            <h1><strong>Buscar Alumno por Boleta</strong></h1>
+                            <br></br>
                                 <input type="text"  className="input_login" placeholder="Ingrese aquí el número de boleta" name="nombre" ref={this.boletaRef} onChange={this.changeState} />
                             </div>
                             {(() => {
@@ -73,6 +74,7 @@ class BuscarBoleta extends React.Component {
                              <br/>
                            <button className="btn"  onClick = {this.searchBoleta}>BUSCAR</button>
                            <br/><br/>
+                                <table>
                                     <tbody >
                                         <tr >
                                             <th className="table_lista, table_title">Alumno</th>
@@ -89,6 +91,7 @@ class BuscarBoleta extends React.Component {
 
                                         </tr>
                                     </tbody>
+                                </table>
                 </div>
             );
         }
@@ -97,7 +100,8 @@ class BuscarBoleta extends React.Component {
             <div className="center">
                 <DirectorioAdmin />
                         <div className="form-group" >
-                            <label htmlFor="nombre" className="text_login">Buscar por Boleta</label>
+                        <h1><strong>Buscar Alumno por Boleta</strong></h1>
+                        <br></br>
                             <input type="text"  className="input_login" name="nombre" placeholder="Ingrese aquí el número de boleta" ref={this.boletaRef} onChange={this.changeState} />
                             {(() => {
                                 switch (this.state.statusBoleta) {

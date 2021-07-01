@@ -69,7 +69,8 @@ class BuscarAlumno extends React.Component {
                 <div className="center">
                     <DirectorioAdmin />
                             <div className="form-group" >
-                                <label htmlFor="nombre" className="text_login">Buscar por Nombre</label>
+                                <h1><strong>Buscar Alumno por Nombre</strong></h1>
+                                <br></br>
                                 <input type="text"  className="input_login" name="nombre" placeholder="Ingresa aquí el nombre" ref={this.nombreRef} onChange={this.changeState} />
                             </div>
                             {(() => {
@@ -86,6 +87,7 @@ class BuscarAlumno extends React.Component {
                             <br/>
                            <button className="btn" onClick = {this.searchAlumno}>BUSCAR</button>
                            <br/><br/>
+                                <table>
                                     <tbody >
                                         <tr >
                                             <th className="table_lista, table_title">Alumno</th>
@@ -104,6 +106,7 @@ class BuscarAlumno extends React.Component {
                                         </tr>
                                     </tbody>
                                 )}
+                                </table>
                 </div>
             );
         }
@@ -111,7 +114,8 @@ class BuscarAlumno extends React.Component {
             <div className="center">
                 <DirectorioAdmin />
                         <div className="form-group" >
-                            <label htmlFor="nombre" className="text_login">Buscar por Nombre</label>
+                            <h1><strong>Buscar Alumno por Nombre</strong></h1>
+                            <br></br>
                             <input type="text"  className="input_login" name="nombre" placeholder="Ingresa aquí el nombre" ref={this.nombreRef} onChange={this.changeState} />
                         </div>
                         {(() => {

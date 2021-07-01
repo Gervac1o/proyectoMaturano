@@ -54,11 +54,8 @@ class DatosActualizadosEmail extends React.Component {
 
     update = () => {
             if(this.state.usuario.password!==undefined || this.state.usuario.password.length >= 6){
-                console.log(this.state.usuario.password + "dentro del segundo  ")
                 if(this.state.usuario.password2.length >= 6 || this.state.usuario.password2 !== undefined){
-                    console.log(this.state.usuario.password2 + "dentro del segundo  if pass 2 ")
-                    if(this.state.usuario.confirmPassword!==undefined || this.state.usuario.confirmPassword=== this.state.usuario.password2){
-                        console.log(this.state.usuario.confirmPassword + "---confirmPassword ")
+                    if(this.state.usuario.confirmPassword!==undefined && this.state.usuario.confirmPassword === this.state.usuario.password2){
                         try{
                             axios.patch("usuario/update", this.state.usuario)
                             .then(res => {
@@ -74,8 +71,6 @@ class DatosActualizadosEmail extends React.Component {
                                 status:false
                             })
                         }
-
-
                     }
                 }
         

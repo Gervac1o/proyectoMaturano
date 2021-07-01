@@ -95,10 +95,19 @@ class DirectorioAdmin extends Component{
                                     </ul>
                                 </div>
                             </th>
-                            <th className="table"><Link to='/admin/Crearadmin' className = "active">Crear Administrador</Link></th>
-                             {/* <th className="table"><Link to='/admin/MisDatosAdmin' className = "active">Datos de Admin</Link></th>*/}
-                            {/*<th className="table"><button id ="table-btn" onClick={this.cerrarSesion}>cerrar sesion</button></th>*/}
-                     <th className="table" >
+                    <th className="table"><div>
+                        <ul>
+                            <li>
+                                <Link to='#' className="active">Administradores ▼</Link>
+                                <ul>
+                                    <li><Link to={'/admin/Crearadmin'} className="active">Crear Administrador</Link></li>
+                                    <li><Link to={'/admin/Admins'} className="active">Lista de Administradores</Link></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                    </th>
+                    <th className="table" >
                          <div >
                         
                         <ul>

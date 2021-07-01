@@ -88,6 +88,7 @@ class SubirServicio extends React.Component {
                         <strong>DOCUMENTACIÓN SERVICIO SOCIAL</strong>
                                 <div>
                                 <br/>
+                                <table>
                                     <tbody>
                                         <tr>
                                             <td className="table_lista, table_title"><strong>Archivo</strong></td>
@@ -110,16 +111,13 @@ class SubirServicio extends React.Component {
                                             </tr>
                                     </tbody>
                                     )}
+                                    </table>
                                     <br/>
                                     <br/>
                                     <div  >
                                   <label for="file" id = "input-size"  >{this.state.file.name}</label>
                                     <input type="file" name = "file" id = "file"  onChange={this.fileChange} />
                                     </div>
-                               
-
-        
-  
                                     {(() => {
                                     switch(this.state.statusArchivo){   
                                         case false:

@@ -37,6 +37,7 @@ import BuscarLiberacionAlumnos from './components/BuscarLiberacionAlumnos';
 import BuscarServicioAlumnos from './components/BuscarServicioAlumnos';
 import Default from "./components/Default";
 import ListaStatus from './components/ListaStatus';
+import ListaAdministradores from './components/ListaAdministradoes';
 
 
 ReactDOM.render(
@@ -52,6 +53,7 @@ ReactDOM.render(
                 {/**RUTA PRINCIPAL  */}<Route exact path="/admin/MisDatosAdmin" component={MisDatosAdmin}/>
                 <Route exact path="/admin/Lista" component={ListaAlumnos}/>
                 <Route exact path="/admin/Validar" component={ListaStatus}/>
+                <Route exact path="/admin/Admins" component={ListaAdministradores}/>
                 <Route exact path="/admin/BuscarNombre" component={BuscarAlumno}/>
                 <Route exact path="/admin/BuscarBoleta" component={BuscarBoleta}/>
                 <Route exact path="/admin/Crearadmin" component={CrearAdmin}/>

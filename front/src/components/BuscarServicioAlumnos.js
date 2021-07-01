@@ -110,6 +110,7 @@ render() {
             <br/><br/>
             <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
             <br/><br/>
+            <table>
                 <tbody>
                     <tr>
                         <th className="table_lista, table_title">Nombre</th>
@@ -262,6 +263,7 @@ render() {
                                     break;
                                 }
                                 })()}
+            </table>
         </React.Fragment>
     );
     }else if(this.state.servicios.length === 0 && this.state.status === 'success'){

@@ -92,7 +92,8 @@ render() {
                             <strong>DOCUMENTACIÓN DICTAMEN</strong>
                                     <div>
                                     <br/>
-                                      {/** */}  <tbody>
+                                    <table>
+                                      <tbody>
                                             <tr>
                                                 <td className="table_lista, table_title"><strong>Archivo</strong></td>
                                                 <td className="table_lista, table_title"><strong>Comentario</strong></td>
@@ -114,6 +115,7 @@ render() {
                                                 </tr>
                                         </tbody>
                                         )}
+                                        </table>
                                         <br/>
                                         <br/>
                                     <div  >

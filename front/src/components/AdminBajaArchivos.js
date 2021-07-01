@@ -10,6 +10,7 @@ class AdminBajaArchivos extends React.Component {
 
     estadoRef = React.createRef();
     comentarioRef=React.createRef();
+    eliminarRef = React.createRef();
 
     state = {
         idAlumno: this.props.id,
@@ -28,6 +29,7 @@ class AdminBajaArchivos extends React.Component {
         cambioEstado: {},
         statusBaja: false,
         statusEstado: null,
+        statusEliminar: null
     };
 
     changeState = () =>{
@@ -102,12 +104,33 @@ class AdminBajaArchivos extends React.Component {
             });
     }//Fin de getAlumno()
 
-    deleteTipoBaja = () => {
-        axios.delete("solicitudBaja/delete/"+this.props.id)
-        .then(res => {
-            window.location.href = "./" + this.props.id
+    statusDelete = () => {
+        this.setState({
+            statusEliminar: this.eliminarRef.current.value
         })
-    }//Fin de deleteTipoBaja
+    }//Fin de Status Delete
+
+    deleteTipoBaja = () => {
+        if(this.state.statusEliminar === "true"){
+            try{
+                axios.delete("solicitudBaja/delete/"+this.props.id)
+                .then(res => {
+                window.location.reload()
+            });
+            }
+            finally{
+                this.setState({
+                    statusEliminar: "false"
+                })
+            }//Fin de finally
+        }
+    else{
+        this.setState({
+            statusEliminar: "false"
+        });
+        }//Fin de else
+     
+}//Fin de deleteTipoBaja
 
     cancelComentario = () => {
         this.setState({
@@ -133,8 +156,6 @@ class AdminBajaArchivos extends React.Component {
             console.log("elid de baaja es " +this.state.statusBaja)
         }
     }//Fin de Cambiar Estado
-
-
 
     fileChange = (event) => {
        this.setState({
@@ -256,7 +277,7 @@ class AdminBajaArchivos extends React.Component {
                                     <strong>Estado:</strong>{this.state.Baja.estado}
                                 </div>
                              
-                                <strong>cambiar estado de la revision</strong>
+                                <strong>Cambiar estado de la revisión:</strong>
                                 <div className="center">
                                     <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                                          <option value=""></option>
@@ -269,12 +290,35 @@ class AdminBajaArchivos extends React.Component {
                                     <br />
                                 </div>
                                 <br />
-                           {/* <button id="btn_deleteRegistro" onClick={this.deleteDictamen}>Borrar Registro</button> */}
+                                <strong>¿Eliminar registro?</strong>
+                                <div className="center">
+                                    <select name="eliminar" ref={this.eliminarRef} onChange={this.statusDelete}>
+                                        <option value="false">NO</option>
+                                        <option value="true">SI</option>
+                                    </select>
+                                    {(() => {
+                                        switch(this.state.statusEliminar){   
+                                            case "false":
+                                            return (
+                                            <a className="warning_search">¡Seleccione "SI" para eliminar alumno!</a>
+                                            );
+                                            break;
+                                            default:
+                                                return(
+                                                    <a className="warning_search">¡Por seguridad antes de eliminar el registro, no debe tener documentos almacenados!</a>
+                                                )
+                                                break;
+                                        }
+                                        })()}
+                                    <button id="btn_delete" onClick={this.deleteTipoBaja}>Eliminar</button>
+                                    <br />
+                                </div>
                             </div>
                             </div>
                         </div>{/**fincontenedor */}
-                        <br />
-                        <br />  
+                        <br /> 
+                        <br /> 
+                        <table>
                                 <tbody>
                                         <tr>
                                             <td className="table_lista, table_title"><strong>Documentos</strong></td>
@@ -306,6 +350,7 @@ class AdminBajaArchivos extends React.Component {
                                             </tr>
                                     </tbody>
                                     )}
+                            </table>
                                     <br />
                                     <div  className="archivosAdminCenter" ><strong>Enviar archivo PDF</strong></div> <br />  
                                     <input type="file" name = "file" onChange={this.fileChange} />

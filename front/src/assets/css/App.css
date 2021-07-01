@@ -372,7 +372,7 @@ div {
 }
 #sidebar.archivosAdminCenter{
   float: center;
-  margin-top: -375px;
+  margin-top: -510px;
   margin-left: 310px;
   min-height: 350px;
   height: auto;
@@ -392,7 +392,6 @@ div {
 #sidebar.archivosAdminCenter3{
 
   float: center;
-  margin-top: -100px;
   margin-left: 480px;
   min-height: 350px;
   height: auto;
@@ -405,6 +404,13 @@ div {
   min-height: 70px;
   height: auto;
   max-width: 300px;
+}
+
+#sidebar.adminEliminar{
+  float: center;
+  height: auto;
+  width: 400px;
+  color: #135081;
 }
 
 #sidebar.liberacionLeft{
@@ -1147,6 +1153,11 @@ ul li ul li:hover {background: #343a40;}
 .table_title{
   background-color: #02275e;
   color: white;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /********+++++++++++++++++++++++++***RESPONSIVE******/

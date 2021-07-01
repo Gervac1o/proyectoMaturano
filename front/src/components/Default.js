@@ -58,20 +58,23 @@ class Default extends React.Component {
                 <MisDatosAlumno/>
               </div>
                );
-               
+              break;
               case false:
                return(
                <div>
                <ValidacionAlumno/>
                </div>
                );
+              break;
               case null:
                 return(
                 <div>
                 <ValidacionAlumno/>
-                </div>
-               
+                </div>             
                );
+               break;
+               default:
+                 break;
         
             }
 

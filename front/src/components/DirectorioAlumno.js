@@ -59,7 +59,7 @@ class DirectorioAlumno extends Component{
                         
                         <ul>
                             <li>
-                                <Link to='#' className="active">{cookies.get('nombre')}...</Link>
+                                <Link to='#' className="active">{cookies.get('nombre')}...▼</Link>
                                 <ul>
                                    
                                     <li className="active" ><Link to='/user/MisDatosAlumno' className = "active">Configuración</Link></li>
