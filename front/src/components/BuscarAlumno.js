@@ -1,10 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 import DirectorioAdmin from './DirectorioAdmin';
-import RecuperacionContraseña from './RecuperacionContraseña';
-
 class BuscarAlumno extends React.Component {
 
 
@@ -26,7 +23,7 @@ class BuscarAlumno extends React.Component {
 
     searchAlumno = (e) => {
         this.changeState();
-        if(this.nombreRef.current.value && this.nombreRef.current.value != null && this.nombreRef.current.value != undefined)
+        if(this.nombreRef.current.value && this.nombreRef.current.value !== null && this.nombreRef.current.value !== undefined)
         {
             axios.get( "alumno/findNombre/" + this.state.nombre)
             .then(res => {
@@ -67,12 +64,13 @@ class BuscarAlumno extends React.Component {
 
     render() {
         
-        if(this.state.status == 'success'){
+        if(this.state.status === 'success'){
             return (
                 <div className="center">
                     <DirectorioAdmin />
                             <div className="form-group" >
-                                <label htmlFor="nombre" className="text_login">Buscar por Nombre</label>
+                                <h1><strong>Buscar Alumno por Nombre</strong></h1>
+                                <br></br>
                                 <input type="text"  className="input_login" name="nombre" placeholder="Ingresa aquí el nombre" ref={this.nombreRef} onChange={this.changeState} />
                             </div>
                             {(() => {
@@ -89,11 +87,12 @@ class BuscarAlumno extends React.Component {
                             <br/>
                            <button className="btn" onClick = {this.searchAlumno}>BUSCAR</button>
                            <br/><br/>
+                                <table>
                                     <tbody >
                                         <tr >
-                                            <th className="table_lista">Alumno</th>
-                                            <th className="table_lista">Boleta</th>
-                                            <th className="table_lista">Programa Academico</th>
+                                            <th className="table_lista, table_title">Alumno</th>
+                                            <th className="table_lista, table_title">Boleta</th>
+                                            <th className="table_lista, table_title">Programa Académico</th>
                                         </tr>
                                     </tbody>
                                 {this.state.alumnos.map((alumno, i) =>
@@ -107,6 +106,7 @@ class BuscarAlumno extends React.Component {
                                         </tr>
                                     </tbody>
                                 )}
+                                </table>
                 </div>
             );
         }
@@ -114,7 +114,8 @@ class BuscarAlumno extends React.Component {
             <div className="center">
                 <DirectorioAdmin />
                         <div className="form-group" >
-                            <label htmlFor="nombre" className="text_login">Buscar por Nombre</label>
+                            <h1><strong>Buscar Alumno por Nombre</strong></h1>
+                            <br></br>
                             <input type="text"  className="input_login" name="nombre" placeholder="Ingresa aquí el nombre" ref={this.nombreRef} onChange={this.changeState} />
                         </div>
                         {(() => {

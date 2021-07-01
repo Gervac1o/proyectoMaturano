@@ -1,6 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HeaderDEyAE from './HeaderDEyAE';
 import DirectorioAlumno from './DirectorioAlumno';
@@ -78,7 +76,7 @@ class Baja extends React.Component {
     }//Fin de search Baja
 
     changeState = () => {
-        if(this.tipoDeBajaRef.current.value !="BAJA CON RECONOCIMIENTO DE HORAS")
+        if(this.tipoDeBajaRef.current.value !=="BAJA CON RECONOCIMIENTO DE HORAS")
         {
             this.setState({
                 baja: {
@@ -123,11 +121,11 @@ class Baja extends React.Component {
     saveBaja = (e) => {
         this.changeState();
         
-        if(this.state.baja.registroSS && this.state.baja.registroSS != null && this.state.baja.registroSS != undefined){
-            if(this.state.baja.programaSS && this.state.baja.programaSS != null && this.state.baja.programaSS != undefined){
-                if(this.state.baja.prestatario && this.state.baja.prestatario != null && this.state.baja.prestatario != undefined){
-                    if(this.state.baja.fechaInicio && this.state.baja.fechaInicio != null && this.state.baja.fechaInicio != undefined){
-                        if(this.state.baja.fechaTermino && this.state.baja.fechaTermino != null && this.state.baja.fechaTermino != undefined){
+        if(this.state.baja.registroSS && this.state.baja.registroSS !== null && this.state.baja.registroSS !== undefined){
+            if(this.state.baja.programaSS && this.state.baja.programaSS !== null && this.state.baja.programaSS !== undefined){
+                if(this.state.baja.prestatario && this.state.baja.prestatario !== null && this.state.baja.prestatario !== undefined){
+                    if(this.state.baja.fechaInicio && this.state.baja.fechaInicio !== null && this.state.baja.fechaInicio !== undefined){
+                        if(this.state.baja.fechaTermino && this.state.baja.fechaTermino !== null && this.state.baja.fechaTermino !== undefined){
                             axios.post( "solicitudBaja/save", this.state.baja)
                             .then(res => {
                                 this.setState(
@@ -182,7 +180,7 @@ class Baja extends React.Component {
         }//Fin de else Numero de Registro de SS
     }//Fin de Funcion saveBaja
     render() {
-        if(this.state.status == 'true'){
+        if(this.state.status === 'true'){
             window.location.reload(false);
         }
 

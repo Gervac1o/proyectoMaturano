@@ -12,11 +12,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import com.bew.demo.dao.AlumnoRepository;
 import com.bew.demo.dto.AlumnoDTO;
 import com.bew.demo.exception.EmptyResultException;
+import com.bew.demo.exception.MailRepetidoException;
 import com.bew.demo.model.Alumno;
+import com.bew.demo.model.Usuario;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 
@@ -151,18 +154,23 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public void saveAlumno(AlumnoDTO alumnoDTO) {
+    public void saveAlumno(AlumnoDTO alumnoDTO) throws EmptyResultException{
         // TODO Auto-generated method stub
+    	if (alumnoRepository.findByBoleta(alumnoDTO.getBoleta()).isPresent()) {
+            throw new EmptyResultException("Esta boleta ya esta registrada");
+        } else {
         Alumno alumno;
         Mapper mapper = DozerBeanMapperBuilder.buildDefault();
         alumno = (mapper.map(alumnoDTO, Alumno.class));
         alumnoRepository.save(alumno);
+        }
     }
 
     @Override
     public void updateAlumno(AlumnoDTO alumnoDTO) throws EmptyResultException {
-
+        
         if(alumnoDTO.getIdAlumno()!=null) {
+        	
             // Aqui no se usa el dozer ya que como es un update hay datos que se deben conservar como el idUser que nunca deberia cambiar.
             Alumno alumnoBase = alumnoRepository.findById(alumnoDTO.getIdAlumno()).orElseThrow(() -> new EmptyResultException("Sin Resultados"));
             alumnoBase.setBoleta(alumnoDTO.getBoleta());
@@ -172,12 +180,16 @@ public class AlumnoServiceImpl implements AlumnoService {
             alumnoBase.setProgramaAcademico(alumnoDTO.getProgramaAcademico());
             alumnoBase.setSexo(alumnoDTO.getSexo());
             alumnoRepository.save(alumnoBase);
-        }else{
-            // guardado por primera vez
-            Alumno alumno;
-            Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-            alumno = (mapper.map(alumnoDTO, Alumno.class));
-            alumnoRepository.save(alumno);
+        	
+        }
+        else if (alumnoRepository.findByBoleta(alumnoDTO.getBoleta()).isPresent()) {
+            throw new EmptyResultException("Esta boleta ya esta registrada");
+        } else {
+        	//guardado por primera vez
+        Alumno alumno;
+        Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+        alumno = (mapper.map(alumnoDTO, Alumno.class));
+        alumnoRepository.save(alumno);
         }
     }
 

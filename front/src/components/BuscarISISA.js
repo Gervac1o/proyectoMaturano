@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Slider from './Slider';
 import DirectorioAdmin from './DirectorioAdmin';
 
 class BuscarISISA extends React.Component {
@@ -32,11 +31,14 @@ class BuscarISISA extends React.Component {
             return (
                 <div className="center">
                     <DirectorioAdmin />
+                    <h1><strong>Alumnos de ISISA</strong></h1>
+                    <br></br>
+                        <table>
                                     <tbody >
                                         <tr >
-                                            <th className="table_lista">Alumno</th>
-                                            <th className="table_lista">Boleta</th>
-                                            <th className="table_lista">Programa Academico</th>
+                                            <th className="table_lista, table_title">Alumno</th>
+                                            <th className="table_lista, table_title">Boleta</th>
+                                            <th className="table_lista, table_title">Programa Académico</th>
                                         </tr>
                                     </tbody>
                                 {this.state.programas.map((programa1, i) =>
@@ -49,24 +51,25 @@ class BuscarISISA extends React.Component {
                                         </tr>
                                     </tbody>
                                 )}
+                        </table>
                 </div>
             );
         }else if(this.state.programas.length === 0 && this.state.status === 'true'){
             return (
                 <div className="center">
                     <DirectorioAdmin />
-                    <div>
-                        <h1>Aun no existen alumnos registrados de este Programa Academico</h1>
-                    </div>
+                    <h1><strong>Alumnos de ISISA</strong></h1>
+                    <br></br>
+                    <h1>Aun no existen alumnos registrados de este Programa Académico</h1>
                 </div>
             );
         }else{
             return(
                 <div className="center">
                     <DirectorioAdmin />
-                    <div>
-                        <h1>Cargando... Espere un momento...</h1>
-                    </div>
+                    <h1><strong>Alumnos de ISISA</strong></h1>
+                    <br></br>
+                    <h1>Cargando... Espere un momento...</h1>
                 </div>
             );
         }

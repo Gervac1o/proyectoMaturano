@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import jspdf, { jsPDF } from 'jspdf';
+import jsPDF from 'jspdf';
 
 
 

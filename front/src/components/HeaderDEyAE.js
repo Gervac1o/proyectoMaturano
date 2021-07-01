@@ -1,6 +1,5 @@
 
 import React from 'react';
-import logo from '../assets/images/esimez2.jpg';
 import logo2 from '../assets/images/esimelogo.png'
 
 class HeaderDEyAE extends React.Component{

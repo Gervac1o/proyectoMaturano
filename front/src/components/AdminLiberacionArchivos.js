@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect,Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 import BorrarDoc from './BorrarDoc';
@@ -9,10 +9,9 @@ const cookies = new Cookies();
 
 class AdminLiberacionArchivos extends React.Component {
 
-
     estadoRef = React.createRef();
-
     comentarioRef = React.createRef();
+    eliminarRef = React.createRef();
 
     state = {
         idAlumno: this.props.id,
@@ -29,7 +28,8 @@ class AdminLiberacionArchivos extends React.Component {
         statusLiberacion: false,
         cambioEstado: {},
     
-        comentario: {}
+        comentario: {},
+        statusEliminar: null
     };
 
     componentWillMount = () => {
@@ -76,13 +76,33 @@ class AdminLiberacionArchivos extends React.Component {
            
     }//Fin de getAlumno()
 
+    statusDelete = () => {
+        this.setState({
+            statusEliminar: this.eliminarRef.current.value
+        })
+    }//Fin de Status Delete
+
     deleteLiberacion = () => {
-        axios.delete("liberacionExtemporanea/delete/" + this.props.id)
-            .then(res => {
+        if(this.state.statusEliminar === "true"){
+            try{
+                axios.delete("liberacionExtemporanea/delete/" + this.props.id)
+                .then(res => {
                 window.location.reload()
-            })
-            
-    }//Fin de deleteDictamen
+                });
+            }
+            finally{
+                this.setState({
+                    statusEliminar: "false"
+                })
+            }//Fin de finally
+        }
+    else{
+        this.setState({
+            statusEliminar: "false"
+        });
+        }//Fin de else
+     
+}//Fin de deleteLiberacion
 
     changeState = () => {
         if(this.estadoRef === "undefined"){ 
@@ -174,7 +194,7 @@ class AdminLiberacionArchivos extends React.Component {
     }
 
     upLoad = () => {
-        if(this.state.file && this.state.file != null && this.state.file != undefined){
+        if(this.state.file && this.state.file !== null && this.state.file !== undefined){
             const fd = new FormData();
             console.log(this.state);
             fd.append('file', this.state.file, this.state.file.name)
@@ -272,7 +292,7 @@ class AdminLiberacionArchivos extends React.Component {
                         }
                     })()}
                     </div>
-                                        <strong>cambiar estado de la revision</strong>
+                                        <strong>Cambiar estado de la revisión:</strong>
                                         <div className="center">
                                             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                                                 <option value=""></option>
@@ -285,18 +305,38 @@ class AdminLiberacionArchivos extends React.Component {
                                             <br />
                                         </div>
                                         <br />
-                                       
+                                        <div className="center">
+                                            <select name="eliminar" ref={this.eliminarRef} onChange={this.statusDelete}>
+                                            <option value="false">NO</option>
+                                            <option value="true">SI</option>
+                                            </select>
+                                        {(() => {
+                                        switch(this.state.statusEliminar){   
+                                            case "false":
+                                            return (
+                                            <a className="warning_search">¡Seleccione "SI" para eliminar alumno!</a>
+                                            );
+                                            break;
+                                            default:
+                                                return(
+                                                    <a className="warning_search">¡Por seguridad antes de eliminar el registro, no debe tener documentos almacenados!</a>
+                                                )
+                                                break;
+                                        }
+                                        })()}
+                                    <button id="btn_delete" onClick={this.deleteLiberacion}>Eliminar</button>
+                                    <br />
+                                    </div>
                                     </div>
                                 </div>
                             </div>
                             {/**fincontenedor */}   
                             <br />
-                            
-                                   
+                                   <table>
                                     <tbody>
                                         <tr>
-                                            <td className="table_lista"><strong>Documentos</strong></td>
-                                            <td className="table_lista"><strong>Comentario</strong></td>
+                                            <td className="table_lista, table_title"><strong>Documentos</strong></td>
+                                            <td className="table_lista, table_title"><strong>Comentario</strong></td>
                                         </tr>
                                     </tbody>
                                     {this.state.listar.map((lista1, i) =>
@@ -326,6 +366,7 @@ class AdminLiberacionArchivos extends React.Component {
                                             </tr>
                                     </tbody>
                                     )}
+                                    </table>
                                         <br/>
                                     <div  className="archivosAdminCenter" ><strong>Enviar archivo PDF</strong></div> <br />    
                                     <input type="file" name = "file"   onChange={this.fileChange} />

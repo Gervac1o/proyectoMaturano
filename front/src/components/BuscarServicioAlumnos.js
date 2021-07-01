@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 import DirectorioAdmin from './DirectorioAdmin';
+import ObtenerAlumnoPorIdAlumno from './ObtenerAlumnoPorIdAlumno';
 class BuscarServicioAlumnos extends Component{
 
     estadoRef = React.createRef();
-
-
 
     state = {
         servicios: [],
@@ -112,11 +110,15 @@ render() {
             <br/><br/>
             <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
             <br/><br/>
+            <table>
                 <tbody>
-                    <tr >
-                        <th className="table_lista">Semestre</th>
-                        <th className="table_lista">Estado de la Solicitud</th>
-                        <th className="table_lista">Revisado por</th>
+                    <tr>
+                        <th className="table_lista, table_title">Nombre</th>
+                        <th className="table_lista, table_title">Boleta</th>
+                        <th className="table_lista, table_title">Programa Académico</th>
+                        <th className="table_lista, table_title">Semestre</th>
+                        <th className="table_lista, table_title">Estado de la Solicitud</th>
+                        <th className="table_lista, table_title">Revisado por</th>
                     </tr>
                 </tbody>
                         {(() => {  
@@ -127,6 +129,9 @@ render() {
                                         {this.state.servicios.map((servicio, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={servicio.idAlumno}
+                                                />
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_new">NO REVISADO</a></td>
                                                 <td className="table_lista">NO REVISADO</td>
@@ -144,6 +149,9 @@ render() {
                                         {this.state.servicios.map((servicio, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={servicio.idAlumno}
+                                                />
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_processing">EN PROCESO</a></td>
                                                 <td className="table_lista">{servicio.revisado}</td>
@@ -161,6 +169,9 @@ render() {
                                         {this.state.servicios.map((servicio, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={servicio.idAlumno}
+                                                />
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_finished">FINALIZADO</a></td>
                                                 <td className="table_lista">{servicio.revisado}</td>
@@ -178,6 +189,9 @@ render() {
                                         {this.state.servicios.map((servicio, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={servicio.idAlumno}
+                                                />
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_rejected">RECHAZADO</a></td>
                                                 <td className="table_lista">{servicio.revisado}</td>
@@ -195,6 +209,9 @@ render() {
                                         {this.state.servicios.map((servicio, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={servicio.idAlumno}
+                                                />
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista">{(() => {  
                                                         switch (servicio.estado){
@@ -246,9 +263,10 @@ render() {
                                     break;
                                 }
                                 })()}
+            </table>
         </React.Fragment>
     );
-    }else if(this.state.servicios.length == 0 && this.state.status == 'success'){
+    }else if(this.state.servicios.length === 0 && this.state.status === 'success'){
         return(
             <React.Fragment>
             <DirectorioAdmin />

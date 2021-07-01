@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Slider from './Slider';
 import Cookies from 'universal-cookie';
 import axios from 'axios';

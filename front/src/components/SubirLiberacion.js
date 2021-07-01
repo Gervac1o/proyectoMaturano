@@ -1,15 +1,12 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-
 import BorrarDoc from './BorrarDoc';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
 class SubirLiberacion extends React.Component {
-
-
     
     state = {
         idLiberacion: cookies.get('idAlumno'),
@@ -53,7 +50,7 @@ class SubirLiberacion extends React.Component {
     }
 
     upLoad = () => {
-        if(this.state.statusArchivo  && this.state.file != undefined){
+        if(this.state.statusArchivo  && this.state.file !== undefined){
             const fd = new FormData();
             console.log(this.state);
             fd.append('file', this.state.file, this.state.file.name)
@@ -82,7 +79,7 @@ class SubirLiberacion extends React.Component {
     }//Fin de funcion upLoad
 
     render() {
-        if(this.state.status == 'true'){
+        if(this.state.status === 'true'){
             window.location.reload(false);
         }
         if(this.state.listar.length >=1){
@@ -92,10 +89,11 @@ class SubirLiberacion extends React.Component {
                         <strong>DOCUMENTACIÓN LIBERACIÓN EXTEMPORANEA</strong>
                                 <div>
                                 <br/>
+                                <table>
                                     <tbody>
                                         <tr>
-                                            <td className="table_lista"><strong>Archivo</strong></td>
-                                            <td className="table_lista"><strong>Comentario</strong></td>
+                                            <td className="table_lista, table_title"><strong>Archivo</strong></td>
+                                            <td className="table_lista, table_title"><strong>Comentario</strong></td>
                                         </tr>
                                     </tbody>
                                     {this.state.listar.map((lista1, i) =>
@@ -114,6 +112,7 @@ class SubirLiberacion extends React.Component {
                                             </tr>
                                     </tbody>
                                     )}
+                                    </table>
                                      <br/>
                                      <br/>
                                     <div  >
@@ -137,7 +136,7 @@ class SubirLiberacion extends React.Component {
                         </div>                  
             </div>
         );
-    }else if(this.state.listar.length == 0){
+    }else if(this.state.listar.length === 0){
         return (
             <div className="center">
                         <div id="sidebar" className="liberacionRight">

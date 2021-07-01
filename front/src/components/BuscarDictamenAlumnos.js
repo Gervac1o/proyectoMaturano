@@ -3,13 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import DirectorioAdmin from './DirectorioAdmin';
+import ObtenerAlumnoPorIdAlumno from './ObtenerAlumnoPorIdAlumno';
 class BuscarDictamenAlumnos extends Component{
 
     estadoRef = React.createRef();
-
-
-
-    idAlumnoRef = React.createRef();
 
     state = {
         dictamenes: [],
@@ -114,12 +111,16 @@ render() {
             <br/><br/>
             <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
             <br/><br/>
+            <table>
                 <tbody>
-                    <tr >
-                        <th className="table_lista">Semestre</th>
-                        <th className="table_lista">Porcentaje de Creditos</th>
-                        <th className="table_lista">Estado de la Solicitud</th>
-                        <th className="table_lista">Revisado por</th>
+                    <tr>
+                        <th className="table_lista, table_title">Nombre</th>
+                        <th className="table_lista, table_title">Boleta</th>
+                        <th className="table_lista, table_title">Programa Académico</th>
+                        <th className="table_lista, table_title">Semestre</th>
+                        <th className="table_lista, table_title">%</th>
+                        <th className="table_lista, table_title">Estado de la Solicitud</th>
+                        <th className="table_lista, table_title">Revisado por</th>
                     </tr>
                 </tbody>
                 {(() => {  
@@ -130,6 +131,9 @@ render() {
                                         {this.state.dictamenes.map((dictamen, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={dictamen.idAlumno}
+                                                />
                                                 <td className="table_lista">{dictamen.semestre}</td>
                                                 <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_new">NO REVISADO</a></td>
@@ -148,6 +152,9 @@ render() {
                                         {this.state.dictamenes.map((dictamen, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={dictamen.idAlumno}
+                                                />
                                                 <td className="table_lista">{dictamen.semestre}</td>
                                                 <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_processing">EN PROCESO</a></td>
@@ -166,6 +173,9 @@ render() {
                                         {this.state.dictamenes.map((dictamen, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={dictamen.idAlumno}
+                                                />
                                                 <td className="table_lista">{dictamen.semestre}</td>
                                                 <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_finished">FINALIZADO</a></td>
@@ -184,6 +194,9 @@ render() {
                                         {this.state.dictamenes.map((dictamen, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={dictamen.idAlumno}
+                                                />
                                                 <td className="table_lista">{dictamen.semestre}</td>
                                                 <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_rejected">RECHAZADO</a></td>
@@ -202,6 +215,9 @@ render() {
                                         {this.state.dictamenes.map((dictamen, i) =>
                                             <tbody key={i}>
                                             <tr>
+                                                <ObtenerAlumnoPorIdAlumno
+                                                idAlumno={dictamen.idAlumno}
+                                                />
                                                 <td className="table_lista">{dictamen.semestre}</td>
                                                 <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista">{(() => {  
@@ -254,9 +270,10 @@ render() {
                                     break;
                                 }
                                 })()}
+            </table>
         </React.Fragment>
     );
-    }else if(this.state.dictamenes.length == 0 && this.state.status == 'success'){
+    }else if(this.state.dictamenes.length === 0 && this.state.status === 'success'){
         return(
             <React.Fragment>
             <DirectorioAdmin />

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Entity
@@ -50,6 +54,8 @@ public class DocsDictamen implements Serializable {
         
     }
 	@ManyToOne(fetch=FetchType.LAZY)
+    //@ManyToOne(cascade=CascadeType.REMOVE)
+	//@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="id_dictamen",insertable=true, updatable = true)
 	private Dictamen dictamen;
 

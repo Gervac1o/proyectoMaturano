@@ -4,11 +4,11 @@ import Cookies from 'universal-cookie';
 import HeaderDEyAE from './HeaderDEyAE';
 import Footer from './Footer';
 import DatosActualizadosAlumno from './DatosActualizadosAlumno';
-import {BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import logo from'../assets/images/user.png';
 const cookies = new Cookies();
 
-class ValidacionAlumno extends React.Component {
+class ValidacionAlumno extends Component {
 
   
 
@@ -131,12 +131,7 @@ class ValidacionAlumno extends React.Component {
            
           
           );
-        
     
-           
-
-
-    
-    }
-}
+    }//Fin de redner()
+}//Fin de Class ValidacionAlumno
 export default ValidacionAlumno;

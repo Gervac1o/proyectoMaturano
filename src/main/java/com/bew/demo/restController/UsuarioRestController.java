@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bew.demo.dto.DictamenDTO;
 import com.bew.demo.dto.UsuarioDTO;
 import com.bew.demo.exception.EmptyResultException;
 import com.bew.demo.service.UsuarioService;
@@ -106,5 +107,28 @@ public class UsuarioRestController {
 	public ResponseEntity<?> delete(@PathVariable("idUsuario") Long idUsuario) throws EmptyResultException{
 	usuarioService.deleteUsuario(idUsuario);
 	return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping(path = "/findStatusNULL", produces = "application/json")
+	public ResponseEntity<?>findStatusNULL(){
+		List<UsuarioDTO> usuarios;
+		usuarios = usuarioService.findUsuarioByStatusNULL();
+		
+		return ResponseEntity.ok(usuarios);
+	}
+	
+	@GetMapping(path = "/findStatus/{status}", produces = "application/json")
+	public ResponseEntity<?>findStatus(@PathVariable("status") Boolean status) throws EmptyResultException{
+		List<UsuarioDTO> usuarios;
+		usuarios = usuarioService.findUsuarioByStatus(status);
+		
+		return ResponseEntity.ok(usuarios);
+	}
+	
+	@PostMapping(path = "/validarStatus", consumes = "application/json")
+	public ResponseEntity<?> validar(@RequestBody UsuarioDTO usuarioDTO) throws  EmptyResultException {
+		
+			usuarioService.validarAlumno (usuarioDTO);
+			return ResponseEntity.ok(usuarioDTO);
 	}
 }

@@ -2,6 +2,7 @@ package com.bew.demo.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Data;
 
@@ -49,7 +53,9 @@ public class Admin implements Serializable{
 		this.telefono=telefono;
 		this.idUsuario=idUsuario;
 }
-	@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.REMOVE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="id_usuario",insertable=false, updatable = false)
 	private Usuario usuario;
 

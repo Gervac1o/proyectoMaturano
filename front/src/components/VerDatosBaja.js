@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import Cookies from 'universal-cookie';
 import PdfBajaAlumno from './PdfBajaAlumno';
 
 const cookies = new Cookies();
 
-class VerDatosBaja extends React.Component{
-
-
+class VerDatosBaja extends Component{
 
     state = {
         tipoBaja: {},

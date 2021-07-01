@@ -1,10 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-
 class ActualizarComentario extends React.Component {
-
-
 
     comentarioRef = React.createRef();
 
@@ -62,7 +59,7 @@ class ActualizarComentario extends React.Component {
     }//Fin de cambiarComentario
 
     render() {
-        if (this.state.status == "true") {
+        if (this.state.status === "true") {
             window.location.reload()
         }
         return (

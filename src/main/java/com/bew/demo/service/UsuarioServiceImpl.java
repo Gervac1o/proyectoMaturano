@@ -124,8 +124,8 @@ public class UsuarioServiceImpl implements UsuarioService{
             usuario = (mapper.map(usuarioDTO, Usuario.class));
             String encPassword = DigestUtils.md5DigestAsHex(usuarioDTO.getPassword().getBytes());
             usuario.setPassword(encPassword);
-            usuario.setTipoUsuario(true);
             usuario.setTipoUsuario(false);
+            usuario.setStatus(false);
             
             usuarioRepository.save(usuario);
            
@@ -145,6 +145,7 @@ public class UsuarioServiceImpl implements UsuarioService{
             String encPassword = DigestUtils.md5DigestAsHex(usuarioDTO.getPassword().getBytes());
             usuario.setPassword(encPassword);
             usuario.setTipoUsuario(true);
+            usuario.setStatus(true);
             
             usuarioRepository.save(usuario);
            
@@ -244,4 +245,46 @@ public class UsuarioServiceImpl implements UsuarioService{
 		
 	}
 
+	@Override
+	public List<UsuarioDTO> findUsuarioByStatusNULL() {
+		// TODO Auto-generated method stub
+		List<UsuarioDTO> usuarioDTO;
+        List<Usuario> usuarios = usuarioRepository.findByStatusNULL();
+        usuarioDTO = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+            usuarioDTO.add(mapper.map(usuario, UsuarioDTO.class));
+        }
+        // TODO Auto-generated method stub
+        return usuarioDTO;
+        
+	}
+
+	@Override
+	public List<UsuarioDTO> findUsuarioByStatus(Boolean status) {
+		// TODO Auto-generated method stub
+		List<UsuarioDTO> usuarioDTO;
+        List<Usuario> usuarios = usuarioRepository.findByStatus(status);
+        usuarioDTO = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+            usuarioDTO.add(mapper.map(usuario, UsuarioDTO.class));
+        }
+        // TODO Auto-generated method stub
+        return usuarioDTO;
+	}
+
+	@Override
+	public void validarAlumno(UsuarioDTO usuarioDTO) throws EmptyResultException {
+		
+		 Usuario usuario;
+	      	Long idUsuario = usuarioDTO.getIdUsuario(); 
+	        System.out.println("id de del usuario" + idUsuario);
+	        
+	        Optional<Usuario> opUsuario = usuarioRepository.findById(idUsuario);
+	        usuario = opUsuario.get();
+	        
+	       	usuario.setStatus(true);
+	       	usuarioRepository.save(usuario);
+	}
 }

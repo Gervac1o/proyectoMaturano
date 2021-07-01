@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.bew.demo.dto.AlumnoDTO;
 import com.bew.demo.exception.EmptyResultException;
+import com.bew.demo.exception.MailRepetidoException;
 
 /**
  * @author Erick
@@ -20,7 +21,7 @@ public interface AlumnoService {
 
     AlumnoDTO AlumnoBoleta(String boleta);
 
-    void saveAlumno(AlumnoDTO alumnoDTO);
+    void saveAlumno(AlumnoDTO alumnoDTO) throws EmptyResultException;
 
     void updateAlumno(AlumnoDTO alumnoDTO) throws EmptyResultException;
 

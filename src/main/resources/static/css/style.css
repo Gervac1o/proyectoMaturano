@@ -4,16 +4,14 @@
 .login-page {
     width: 400px;
     padding: 2% 0 0;
-    margin-left: 800px;
+    margin-left: 900px;
     margin-top: -30px;
-    filter: none;
 }
 .login-page2 {
-    width: 700px;
-    padding: 2%;
-    margin-left: 50px;
-    margin-top: -623px;
-    filter: none;
+    width: 820px;
+    padding: 2% 0 0;
+    margin-left: 10px;
+    margin-top: -20px;
 }
 .header{
     color: #FFFFFF;
@@ -23,12 +21,10 @@
 }
 .form {
     height: auto;
-   
-    
+    z-index: 1;
     background: #ffffffee;
     max-width: 360px;
-    margin:auto;
-    margin-top: 50px;
+    margin: 0 auto 100px;
     border-radius: 5px;
     padding: 40px;
     text-align: center;
@@ -37,14 +33,12 @@
 
 .form2{
    
-    height: 465px;
+    height: 540px;
     background: #2c2c2cea;
-    max-width: 700px;
-    margin: 0 auto 100px;
-    margin-top: 50px;
+    max-width: 800px;
     border-radius: 5px;
-    padding: 40px;
-    text-align: left;
+    padding: 20px;
+    position: fixed;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     
 }
@@ -149,32 +143,27 @@ body {
     
 }
 
-
-
 #logo2 {
-    width: 47%;
-    margin-top: -10px;
-    margin-left: 80px;
-    margin-bottom: 20px;
-    float: left;
-    
-    
+    width: 43%;
 }
 
 .text-logo {
-    display: block;
-    margin-top: -20px;
-    margin-left: 0px;
-    font-size: 23px;
-    color: rgb(117, 23, 64);
-    float: right;
+    margin-top: 4px;
+    font-size: 20px;
+    color: maroon;
+    float: left;
     font-weight: bold;
-    text-align: center;
 
 }
-#text-info{
+#text-info-title{
     color:rgb(226, 226, 226);
     font-size: 25px;
+    text-align: center;
+}
+#text-info-body{
+    color:rgb(226, 226, 226);
+    font-size: 20px;
+    text-align: left;
 }
 .error {
     color: #FF1C19;
@@ -193,4 +182,11 @@ input:not(:placeholder-shown):invalid {
     background-color: pink;
 }
 
+.link{
+    color: rgb(226, 226, 226);
+}
 
+.link:hover{
+    text-decoration: none;
+    color: #5099bb;
+}

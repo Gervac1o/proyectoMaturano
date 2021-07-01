@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect,Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import BorrarDoc from './BorrarDoc';
 import ActualizarComentario from './ActualizarComentario';
@@ -8,10 +8,9 @@ const cookies = new Cookies();
 
 class AdminServicioArchivos extends React.Component {
 
-
-    
     estadoRef = React.createRef();
     comentarioRef=React.createRef();
+    eliminarRef = React.createRef();
 
     state = {
         idAlumno: this.props.id,
@@ -92,13 +91,34 @@ class AdminServicioArchivos extends React.Component {
                 });
             });
     }//Fin de getAlumno()
-    
-    deleteServicio = () => {
-        axios.delete("servicioSocial/delete/"+this.props.id)
-        .then(res => {
-            window.location.href = "./" + this.props.id
+
+    statusDelete = () => {
+        this.setState({
+            statusEliminar: this.eliminarRef.current.value
         })
-    }//Fin de deleteServicio
+    }//Fin de Status Delete
+
+    deleteServicio = () => {
+        if(this.state.statusEliminar === "true"){
+            try{
+                axios.delete("servicioSocial/delete/"+this.props.id)
+                .then(res => {
+                window.location.reload()
+                });
+            }
+            finally{
+                this.setState({
+                    statusEliminar: "false"
+                })
+            }//Fin de finally
+        }
+    else{
+        this.setState({
+            statusEliminar: "false"
+        });
+        }//Fin de else
+     
+}//Fin de deleteServicio
     
     cancelComentario = () => {
         this.setState({
@@ -155,7 +175,7 @@ class AdminServicioArchivos extends React.Component {
          });
      }
     upLoad = () => {
-        if(this.state.file && this.state.file != null && this.state.file != undefined){
+        if(this.state.file && this.state.file !== null && this.state.file !== undefined){
             const fd = new FormData();
             fd.append('file', this.state.file, this.state.file.name)
                 axios.post("docServicio/upload/" + this.state.file.name + this.props.id, fd)
@@ -231,7 +251,7 @@ class AdminServicioArchivos extends React.Component {
                                 })()}
                                 </div>
                              
-                                <strong>cambiar estado de la revision</strong>
+                                <strong>cambiar estado de la revisión</strong>
                                 <div className="center">
                                     <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                                         <option value=""></option>
@@ -244,19 +264,39 @@ class AdminServicioArchivos extends React.Component {
                                     <br />
                                 </div>
                                 <br />
-                               {/* <button id="btn_deleteRegistro" onClick={this.deleteDictamen}>Borrar Registro</button>*/} 
+                                <div className="center">
+                                            <select name="eliminar" ref={this.eliminarRef} onChange={this.statusDelete}>
+                                            <option value="false">NO</option>
+                                            <option value="true">SI</option>
+                                            </select>
+                                        {(() => {
+                                        switch(this.state.statusEliminar){   
+                                            case "false":
+                                            return (
+                                            <a className="warning_search">¡Seleccione "SI" para eliminar alumno!</a>
+                                            );
+                                            break;
+                                            default:
+                                                return(
+                                                    <a className="warning_search">¡Por seguridad antes de eliminar el registro, no debe tener documentos almacenados!</a>
+                                                )
+                                                break;
+                                        }
+                                        })()}
+                                    <button id="btn_delete" onClick={this.deleteServicio}>Eliminar</button>
+                                    <br />
+                                    </div>
                             </div>
                             </div>
                             </div>
-                      
-                                                
                          {/**fincontenedor */}
                         <br />
-                        <br />
+                        <br /> 
+                        <table>
                                <tbody>
                                         <tr>
-                                            <td className="table_lista"><strong>Documentos</strong></td>
-                                            <td className="table_lista"><strong>Comentario</strong></td>
+                                            <td className="table_lista, table_title"><strong>Documentos</strong></td>
+                                            <td className="table_lista, table_title"><strong>Comentario</strong></td>
                                         </tr>
                                     </tbody>
                                     {this.state.listar.map((lista1, i) =>
@@ -283,6 +323,7 @@ class AdminServicioArchivos extends React.Component {
                                             </tr>
                                     </tbody>
                                     )}
+                        </table>
                                     <br />
                                     <div  className="archivosAdminCenter" ><strong>Enviar archivo PDF</strong></div> <br /> 
                                     <input type="file" name = "file" onChange={this.fileChange} />
@@ -303,8 +344,6 @@ class AdminServicioArchivos extends React.Component {
                                 <button className="btn"  onClick = {this.upLoad}>ENVIAR</button> 
                             </div>
                             </div>
-                           
-               
             );
         
     }//Fin de Render

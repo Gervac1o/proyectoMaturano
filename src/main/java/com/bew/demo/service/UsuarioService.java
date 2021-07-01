@@ -23,4 +23,10 @@ public interface UsuarioService {
 	void saveUsuarioAdmin(UsuarioDTO usuarioDTO) throws MailRepetidoException;
 	
 	UsuarioDTO findUsuarioByAlumno(Long idAlumno) throws EmptyResultException;
+	
+	List<UsuarioDTO> findUsuarioByStatusNULL ();
+	
+	List<UsuarioDTO> findUsuarioByStatus(Boolean status);
+	
+	void validarAlumno (UsuarioDTO usuarioDTO)throws EmptyResultException; 
 }

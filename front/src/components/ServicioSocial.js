@@ -1,6 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import HeaderDEyAE from './HeaderDEyAE';
 import axios from 'axios';
 import DirectorioAlumno from './DirectorioAlumno';
@@ -92,7 +90,7 @@ class ServicioSocial extends React.Component {
 
     }//Fin de funcion saveServicio()
     render() {
-        if(this.state.status == 'true'){
+        if(this.state.status === 'true'){
             window.location.reload(false);
         }
 

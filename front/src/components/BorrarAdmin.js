@@ -1,46 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class BorrarAlumno extends React.Component {
+class BorrarAdmin extends React.Component {
 
     cambioRef = React.createRef();
 
     state = {
-        alumno:{},
         recuperar:{},
         statusElimar: null,
         status: null,
-        email: "",
-        clase:this.props.className
     }
     /* HAY QUE ACTIVAR EL ID Y EMAIL DEL STATE*/
     changeState = () =>{
         this.setState({
             recuperar:{
                 idUsuario: this.props.id,
-                email: this.state.alumno.email
             }
         });
     }//Fin de changeState
-
-  componentWillMount = () =>{
-    this.getAlumno();
-  }
-
-     getAlumno = () =>{
-        axios.get("usuario/findByAlumno/"+ this.props.id)
-        .then(res =>{
-            this.setState({
-                alumno: res.data,
-            });
-        });
-
-    }//Fin de getUsuario()
     
-    deleteAlumno = () =>{
+    deleteAdmin = () =>{
         if(this.cambioRef.current.value === "SI"){
             try{
-                axios.delete("alumno/delete/"+this.state.recuperar.idUsuario)
+                axios.delete("admin/delete/"+this.state.recuperar.idUsuario)
                 .then(res => {
                     this.setState({
                         status: true
@@ -62,24 +44,15 @@ class BorrarAlumno extends React.Component {
         render() {
             const {cancel} = this.props
             if(this.state.status === true){
-                return(
-                    <div className="center">
-                    <div id="sidebar" className={ this.props.className}>
-                    <br/><br/>
-                    <strong>Se eliminó el alumno con éxito</strong>
-                    </div>
-                    </div>
-                    
-                );
+                window.location.reload(false);
             }
             else{
                 return (
                     
                     <div className="center">
-                    <div id="sidebar" className={ this.props.className}>
-            
+                        <div id="sidebar" className="adminEliminar">
                     <br/>
-                                                    <strong>¿ELIMINAR ALUMNO?</strong>
+                                                    <strong>¿DESEA ELIMINAR SU CUENTA?</strong>
                                                     <br/>  
                                                     <select name="actualizar" ref={this.cambioRef} onChange={this.changeState}>
                                                         <option value="NO">NO</option>
@@ -90,20 +63,15 @@ class BorrarAlumno extends React.Component {
                                                     switch(this.state.statusElimar){   
                                                         case "false":
                                                         return (
-                                                        <a className="warning_search">¡Seleccione "SI" para eliminar alumno!</a>
+                                                        <a className="warning_search">¡Seleccione "SI" para eliminar cuenta!</a>
                                                         );
                                                         break;
                                                         default:
-                                                            return(
-                                                                <a className="warning_search">¡Por seguridad antes de eliminar, el alumno no debe tener registros y documentos almacenados!</a>
-                                                            )
                                                             break;
                                                     }
-                                                    })()}<br/>
-                                                    <strong>Email:</strong> {this.state.alumno.email}
-                                                    <br/> <br/>
-
-                                                    <button className="btn" onClick={this.deleteAlumno}>ACEPTAR</button>
+                                                    })()}
+                                                    <br></br>
+                                                    <button className="btn" onClick={this.deleteAdmin}>ACEPTAR</button>
                                                     <button  className ="btnCancel" onClick={cancel}>Cancelar</button>                                
                     </div>
                     </div>
@@ -111,5 +79,5 @@ class BorrarAlumno extends React.Component {
         }
     }//Fin de Render
 
-}//Fin de class Borrar Alumno
-export default BorrarAlumno;
+}//Fin de class Borrar Admin
+export default BorrarAdmin;

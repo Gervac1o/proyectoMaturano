@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-
-class DocLiberacion extends React.Component{
+class DocLiberacion extends Component{
 
 
 
@@ -20,7 +18,7 @@ class DocLiberacion extends React.Component{
             console.log("VALOR DE DOC LIBERACION" + this.state.docLiberacion)
         }
     render() {
-        if(this.state.status == "true"){
+        if(this.state.status === "true"){
             return(
                 <div>
                         <iframe  src={"http://localhost:8080/docLiberacion/getDoc/" + this.state.docLiberacion}></iframe>

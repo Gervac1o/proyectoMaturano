@@ -4,13 +4,12 @@ import axios from 'axios';
 
 const cookies = new Cookies();
 
-class DatosActualizadosAlumno extends React.Component {
+class DatosAlmacenadosAlumno extends React.Component {
 
 
     nombreRef = React.createRef();
     apellidoPaternoRef = React.createRef();
     apellidoMaternoRef = React.createRef();
-    boletaRef = React.createRef();
     programaAcademicoRef = React.createRef();
     sexoRef = React.createRef();
     idUsuarioRef = React.createRef();
@@ -21,8 +20,7 @@ class DatosActualizadosAlumno extends React.Component {
         alumno: {},
         idUsuario: cookies.get('idUsuario'),
         idAlumno: cookies.get('idAlumno'),
-        statusNombre: null,
-        statusBoleta: this.props.statusBoleta, 
+        statusNombre: null, 
         statusBtnCancel: this.props.statusBtnCancel,    
         statusApellidoPaterno: null,
         statusApellidoMaterno: null,
@@ -37,7 +35,7 @@ class DatosActualizadosAlumno extends React.Component {
                 nombre: this.nombreRef.current.value.toUpperCase(),
                 apellidoPaterno: this.apellidoPaternoRef.current.value.toUpperCase(),
                 apellidoMaterno: this.apellidoMaternoRef.current.value.toUpperCase(),
-                boleta: this.boletaRef.current.value,
+                boleta: this.cookiesBoletaRef,
                 programaAcademico: this.programaAcademicoRef.current.value,
                 sexo: this.sexoRef.current.value,
                 idUsuario: this.state.idUsuario,
@@ -51,27 +49,12 @@ class DatosActualizadosAlumno extends React.Component {
         if (this.state.alumno.nombre && this.state.alumno.nombre !== null && this.state.alumno.nombre !== undefined) {
             if (this.state.alumno.apellidoPaterno && this.state.alumno.apellidoPaterno !== null && this.state.alumno.apellidoPaterno !== undefined) {
                 if (this.state.alumno.apellidoMaterno && this.state.alumno.apellidoMaterno !== null && this.state.alumno.apellidoMaterno !== undefined) {
-                    if (this.state.alumno.boleta.length === 10) {
-                       
-                        axios.patch("alumno/update", this.state.alumno)
-                            .then(res => {
-                                this.setState({
-                                    status: "true"
-                                });
-                            });
-
-                    } else {
-                        this.setState(
-                            {
-                                statusBoleta: "false",
-                                statusApellidoMaterno: "true",
-                                statusApellidoPaterno: "true",
-                                statusNombre: "true",
-                                boletaExiste: "false"
-
-                            }
-                        );
-                    }//Fin de else Boleta
+                    axios.patch("alumno/update", this.state.alumno)
+                    .then(res => {
+                        this.setState({
+                            status: "true"
+                        });
+                    });
                 } else {
                     this.setState(
                         {
@@ -159,36 +142,6 @@ class DatosActualizadosAlumno extends React.Component {
                         })()}
                     </div>
                     <div>
-
-                        {(() => {
-                            switch (this.state.statusBoleta) {
-                                case "false":
-                                    return (
-                                        <div>
-                                        <label htmlFor="boleta" className="text_login">Boleta</label>
-                                        <input type="text" className="input_login" name="boleta" ref={this.boletaRef}
-                                               placeholder="Número de Boleta" onChange={this.changeState}/>
-                                        <a className="warning">¡Ingresa tu boleta con solo 10 números!</a>
-                                        </div>
-                                    );
-                                    break;
-                                default:
-                                    break;
-                            }
-                        })()}
-                        {(() => {
-                            switch (this.state.boletaExiste) {
-                                case "true":
-                                    return (
-                                        <a className="warning">¡Esta boleta ya fue registrada!</a>
-                                    );
-                                    break;
-                                default:
-                                    break;
-                            }
-                        })()}
-                    </div>
-                    <div>
                         <label htmlFor="programa" className="text_login">Programa Academico</label>
                         <select name="programa" className="input_login" ref={this.programaAcademicoRef}
                                 onChange={this.changeState}>
@@ -222,11 +175,10 @@ class DatosActualizadosAlumno extends React.Component {
                                 break;
                         }
                     })()}
-                   
                 </div>
             </div>
         );
     }
 }
 
-export default DatosActualizadosAlumno;
+export default DatosAlmacenadosAlumno;

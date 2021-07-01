@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import Cookies from 'universal-cookie';
 import PdfDictamenAlumno from './PdfDictamenAlumno';
 
 const cookies = new Cookies();
 
-class VerDatosDictamen extends React.Component{
-
-
+class VerDatosDictamen extends Component{
 
     state = {
         dictamen: {},

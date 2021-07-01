@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-
-class DocBaja extends React.Component{
+class DocBaja extends Component{
 
 
 
@@ -19,7 +17,7 @@ class DocBaja extends React.Component{
             })
         }
     render() {
-        if(this.state.status == "true"){
+        if(this.state.status === "true"){
             return(
                 <div>
                         <iframe  src={ "http://localhost:8080/docBaja/getDoc/" + this.state.docBaja}></iframe>

@@ -1,15 +1,12 @@
 import React from 'react';
-import { Redirect,Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-
 import Cookies from 'universal-cookie';
 import BorrarDoc from './BorrarDoc';
 
 const cookies = new Cookies();
 
 class SubirDictamen extends React.Component {
-
-
     
     state = {
         idDictamen: cookies.get('idAlumno'),
@@ -53,7 +50,7 @@ class SubirDictamen extends React.Component {
     }
 
     upLoad = () => {
-        if(this.state.statusArchivo != null && this.state.statusArchivo != undefined){
+        if(this.state.statusArchivo !== null && this.state.statusArchivo !== undefined){
             const fd = new FormData();
             console.log(this.state);
             fd.append('file', this.state.file, this.state.file.name)
@@ -95,10 +92,11 @@ render() {
                             <strong>DOCUMENTACIÓN DICTAMEN</strong>
                                     <div>
                                     <br/>
-                                      {/** */}  <tbody>
+                                    <table>
+                                      <tbody>
                                             <tr>
-                                                <td className="table_lista"><strong>Archivo</strong></td>
-                                                <td className="table_lista"><strong>Comentario</strong></td>
+                                                <td className="table_lista, table_title"><strong>Archivo</strong></td>
+                                                <td className="table_lista, table_title"><strong>Comentario</strong></td>
                                             </tr>
                                         </tbody>
                                         {this.state.listar.map((lista1, i) =>
@@ -117,6 +115,7 @@ render() {
                                                 </tr>
                                         </tbody>
                                         )}
+                                        </table>
                                         <br/>
                                         <br/>
                                     <div  >

@@ -1,10 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-
 import DirectorioAdmin from './DirectorioAdmin';
 import { Link } from 'react-router-dom';
-import { Alert } from 'bootstrap';
-import RecuperacionContraseña from './RecuperacionContraseña';
 
 class BuscarBoleta extends React.Component {
 
@@ -27,7 +24,7 @@ class BuscarBoleta extends React.Component {
 
     searchBoleta = (e) => {
         this.changeState();
-        if(this.boletaRef.current.value && this.boletaRef.current.value != null && this.boletaRef.current.value != undefined)
+        if(this.boletaRef.current.value && this.boletaRef.current.value !== null && this.boletaRef.current.value !== undefined)
         {
             axios.get("alumno/findBoleta/" + this.state.boleta)
             .then(res => {
@@ -54,12 +51,13 @@ class BuscarBoleta extends React.Component {
 
     render() {
 
-        if(this.state.status == 'success'){
+        if(this.state.status === 'success'){
             return (
                 <div className="center">
                     <DirectorioAdmin />
                             <div className="form-group" >
-                                <label htmlFor="nombre" className="text_login">Buscar por Boleta</label>
+                            <h1><strong>Buscar Alumno por Boleta</strong></h1>
+                            <br></br>
                                 <input type="text"  className="input_login" placeholder="Ingrese aquí el número de boleta" name="nombre" ref={this.boletaRef} onChange={this.changeState} />
                             </div>
                             {(() => {
@@ -76,11 +74,12 @@ class BuscarBoleta extends React.Component {
                              <br/>
                            <button className="btn"  onClick = {this.searchBoleta}>BUSCAR</button>
                            <br/><br/>
+                                <table>
                                     <tbody >
                                         <tr >
-                                            <th className="table_lista">Alumno</th>
-                                            <th className="table_lista">Boleta</th>
-                                            <th className="table_lista">Programa Academico</th>
+                                            <th className="table_lista, table_title">Alumno</th>
+                                            <th className="table_lista, table_title">Boleta</th>
+                                            <th className="table_lista, table_title">Programa Académico</th>
                                         </tr>
                                     </tbody>
                                     <tbody>
@@ -92,6 +91,7 @@ class BuscarBoleta extends React.Component {
 
                                         </tr>
                                     </tbody>
+                                </table>
                 </div>
             );
         }
@@ -100,7 +100,8 @@ class BuscarBoleta extends React.Component {
             <div className="center">
                 <DirectorioAdmin />
                         <div className="form-group" >
-                            <label htmlFor="nombre" className="text_login">Buscar por Boleta</label>
+                        <h1><strong>Buscar Alumno por Boleta</strong></h1>
+                        <br></br>
                             <input type="text"  className="input_login" name="nombre" placeholder="Ingrese aquí el número de boleta" ref={this.boletaRef} onChange={this.changeState} />
                             {(() => {
                                 switch (this.state.statusBoleta) {

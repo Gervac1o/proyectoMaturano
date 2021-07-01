@@ -1,15 +1,11 @@
 import React from 'react';
-import { Redirect, HashRouter } from 'react-router-dom';
 import axios from 'axios';
 import HeaderDEyAE from './HeaderDEyAE';
-import { Link } from 'react-router-dom';
 import DirectorioAlumno from './DirectorioAlumno';
 import Footer from './Footer';
 import SubirDictamen from './SubirDictamen';
 import VerDatosDictamen from './VerDatosDictamen';
 import Cookies from 'universal-cookie';
-
-
 
 const cookies = new Cookies();
 
@@ -74,7 +70,7 @@ class Dictamen extends React.Component {
     saveDictamen = async (e) => {
         this.changeState();
         //alert(this.state.idAlumno)
-        if(this.state.dictamen.porcentajeCreditos && this.state.dictamen.porcentajeCreditos != null && this.state.dictamen.porcentajeCreditos != undefined){
+        if(this.state.dictamen.porcentajeCreditos > 67 && this.state.dictamen.porcentajeCreditos < 70){
          await axios.post("user/dictamen/save", this.state.dictamen)
             .then(res => {
                 this.setState(
@@ -109,13 +105,26 @@ class Dictamen extends React.Component {
                                 <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>
                                      
                             </div>
-                            <br/>
-                            
-         
+                            <br></br>
+                            {(() => {
+                                switch(this.state.estado){
+                                    case "NUEVO":
+                                    return (
                                         <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-     
+                                    );
+                                    case undefined:
+                                    return (
+                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
+                                    );
+                                    case null:
+                                    return (
+                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
+                                    );
+                                    default:
+                                        break;
+                                }
+                            })()} 
                           </div>
-                         
                           <SubirDictamen/>
                           <VerDatosDictamen/>
                           <Footer/>

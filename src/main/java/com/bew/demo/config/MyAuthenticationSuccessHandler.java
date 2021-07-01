@@ -19,17 +19,17 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         Usuario usuario = (Usuario) authentication.getPrincipal();
 
         Cookie cIdUsuario = new Cookie("idUsuario", usuario.getIdUsuario().toString());
-        cIdUsuario.setMaxAge(60 * 10);
+        cIdUsuario.setMaxAge(60*60*24*31);
         cIdUsuario.setPath("/");
         cIdUsuario.setSecure(false);
         httpServletResponse.addCookie(cIdUsuario);
         Cookie cMail = new Cookie("email", usuario.getEmail());
-        cMail.setMaxAge(60 * 10);
+        cMail.setMaxAge(60*60*24*31);
         cMail.setPath("/");
         cMail.setSecure(false);
         httpServletResponse.addCookie(cMail);
         Cookie cTipoUsuario = new Cookie("tipoUsuario", usuario.getTipoUsuario().toString());
-        cTipoUsuario.setMaxAge(60 * 10);
+        cTipoUsuario.setMaxAge(60*60*24*31);
         cTipoUsuario.setPath("/");
         cTipoUsuario.setSecure(false);
         httpServletResponse.addCookie(cTipoUsuario);

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import PdfServicioAlumno from './PdfServicioAlumno';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-class VerDatosServicio extends React.Component{
-
-
+class VerDatosServicio extends Component{
 
     state = {
         servicio: {},
@@ -32,7 +28,7 @@ class VerDatosServicio extends React.Component{
         
     render() {
         if(this.state.servicio ){
-            if(this.state.servicio.semestre != "EGRESADO")
+            if(this.state.servicio.semestre !== "EGRESADO")
             {
                 return(
                     <div className="center">

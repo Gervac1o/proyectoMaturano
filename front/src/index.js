@@ -3,27 +3,18 @@ import ReactDOM from 'react-dom';
 import './assets/css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-import {BrowserRouter, Route, Switch, HashRouter} from 'react-router-dom';
+import {Route, Switch, HashRouter} from 'react-router-dom';
 
 import Error from './components/Error';
-import DirectorioAdmin from './components/DirectorioAdmin';
 import ListaAlumnos from './components/ListaAlumnos';
 import BuscarAlumno from './components/BuscarAlumno';
 import CrearAdmin from './components/CrearAdmin';
-import DirectorioAlumno from './components/DirectorioAlumno';
 import Dictamen from './components/Dictamen';
 import Liberacion from './components/Liberacion';
 import Baja from './components/Baja';
 import ServicioSocial from './components/ServicioSocial';
-import SubirDictamen from './components/SubirDictamen';
-import SubirLiberacion from './components/SubirLiberacion';
-import SubirBaja from './components/SubirBaja';
-import SubirServicio from './components/SubirServicio';
-
 import DatosAlumno from './components/DatosAlumno';
 import MisDatosAlumno from './components/MisDatosAlumno';
-import DatosAdmin from './components/DatosAdmin';
 import MisDatosAdmin from './components/MisDatosAdmin';
 import DocDictamen from './components/DocDictamen';
 import PdfDictamen from './components/PdfDictamen';
@@ -45,6 +36,8 @@ import BuscarBajaAlumnos from './components/BuscarBajaAlumnos';
 import BuscarLiberacionAlumnos from './components/BuscarLiberacionAlumnos';
 import BuscarServicioAlumnos from './components/BuscarServicioAlumnos';
 import Default from "./components/Default";
+import ListaStatus from './components/ListaStatus';
+import ListaAdministradores from './components/ListaAdministradoes';
 
 
 ReactDOM.render(
@@ -59,6 +52,8 @@ ReactDOM.render(
 
                 {/**RUTA PRINCIPAL  */}<Route exact path="/admin/MisDatosAdmin" component={MisDatosAdmin}/>
                 <Route exact path="/admin/Lista" component={ListaAlumnos}/>
+                <Route exact path="/admin/Validar" component={ListaStatus}/>
+                <Route exact path="/admin/Admins" component={ListaAdministradores}/>
                 <Route exact path="/admin/BuscarNombre" component={BuscarAlumno}/>
                 <Route exact path="/admin/BuscarBoleta" component={BuscarBoleta}/>
                 <Route exact path="/admin/Crearadmin" component={CrearAdmin}/>

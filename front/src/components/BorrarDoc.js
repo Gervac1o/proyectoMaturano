@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 
-class BorrarDoc extends React.Component {
+class BorrarDoc extends Component {
 
 
     state = {

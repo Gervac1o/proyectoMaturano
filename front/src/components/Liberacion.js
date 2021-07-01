@@ -1,6 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HeaderDEyAE from './HeaderDEyAE';
 import DirectorioAlumno from './DirectorioAlumno';
@@ -99,12 +97,12 @@ class Liberacion extends React.Component {
     saveLiberacion = (e) => {
         this.changeState();
         console.log("ID DEL ALUMNO" + this.state.liberacion.idAlumno)
-        if(this.state.liberacion.registroSS && this.state.liberacion.registroSS != null && this.state.liberacion.registroSS != undefined){
-            if(this.state.liberacion.programaSS && this.state.liberacion.programaSS != null && this.state.liberacion.programaSS != undefined){
-                if(this.state.liberacion.prestatario && this.state.liberacion.prestatario != null && this.state.liberacion.prestatario != undefined){
-                    if(this.state.liberacion.telefono && this.state.liberacion.telefono != null && this.state.liberacion.telefono != undefined){
-                        if(this.state.liberacion.fechaInicio && this.state.liberacion.fechaInicio != null && this.state.liberacion.fechaInicio != undefined){
-                            if(this.state.liberacion.fechaTermino && this.state.liberacion.fechaTermino != null && this.state.liberacion.fechaTermino != undefined){
+        if(this.state.liberacion.registroSS && this.state.liberacion.registroSS !== null && this.state.liberacion.registroSS !== undefined){
+            if(this.state.liberacion.programaSS && this.state.liberacion.programaSS !== null && this.state.liberacion.programaSS !== undefined){
+                if(this.state.liberacion.prestatario && this.state.liberacion.prestatario !== null && this.state.liberacion.prestatario !== undefined){
+                    if(this.state.liberacion.telefono && this.state.liberacion.telefono !== null && this.state.liberacion.telefono !== undefined){
+                        if(this.state.liberacion.fechaInicio && this.state.liberacion.fechaInicio !== null && this.state.liberacion.fechaInicio !== undefined){
+                            if(this.state.liberacion.fechaTermino && this.state.liberacion.fechaTermino !== null && this.state.liberacion.fechaTermino !== undefined){
                                 axios.post("liberacionExtemporanea/save", this.state.liberacion)
                                     .then(res => {
                                         this.setState({
@@ -155,7 +153,7 @@ class Liberacion extends React.Component {
         }//Fin de else Numero de Registro de SS
     }//Fin de funcion saveLiberacion()
     render() {
-        if(this.state.status == 'true'){
+        if(this.state.status === 'true'){
             window.location.reload(false);
         }
 

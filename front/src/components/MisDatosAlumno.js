@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
 import HeaderDEyAE from './HeaderDEyAE';
 import axios from 'axios';
 import DirectorioAlumno from './DirectorioAlumno';
 import Cookies from 'universal-cookie';
 import DatosActualizadosAlumno from './DatosActualizadosAlumno';
 import DatosActualizadosEmail from './DatosActualizadosEmail';
-import ValidacionAlumno from './ValidacionAlumno';
+import DatosAlmacenadosAlumno from './DatosAlmacenadosAlumno';
 
 const cookies = new Cookies();
 
-class MisDatosAlumno extends React.Component {
+class MisDatosAlumno extends Component {
 
 
     state = {
         alumno: {
-            nombre:"null"
+            nombre:"---",
+            boleta:"---",
+            programaAcademico:"---"
         },
         usuario: {},
         idUsuario: cookies.get('idUsuario'),
@@ -73,14 +74,13 @@ class MisDatosAlumno extends React.Component {
             <div className="center">
                 <HeaderDEyAE/>
                 <DirectorioAlumno/>
-               
-
+                <table>
                 <tbody>
                 <tr>
-                    <th className="table_lista">Nombre</th>
-                    <th className="table_lista">Boleta</th>
-                    <th className="table_lista">Programa Academico</th>
-                    <th className="table_lista">Correo</th>
+                    <th className="table_lista, table_title">Nombre</th>
+                    <th className="table_lista, table_title">Boleta</th>
+                    <th className="table_lista, table_title">Programa Académico</th>
+                    <th className="table_lista, table_title">Correo</th>
                 </tr>
                 </tbody>
                 <tbody>
@@ -89,35 +89,35 @@ class MisDatosAlumno extends React.Component {
                     <td className="table_lista">{this.state.alumno.boleta}</td>
                     <td className="table_lista">{this.state.alumno.programaAcademico}</td>
                     <td className="table_lista">{this.state.email}</td>
-
                 </tr>
                 </tbody>
+                </table>
+                <table>
                 <tbody>
                 <tr>
                     <tr>
-                        <td className="table_lista">
+                        <td>
                             <button className="btn" id="btn-table" onClick={this.updateDatos}>Actualizar Información
                                 Personal
                             </button>
                         </td>
-                    </tr>
-                    <tr>
-                        <td className="table_lista">
+                        <td>
                             <button className="btn" id="btn-table" onClick={this.updateEmail}>Cambiar Contraseña
                             </button>
                         </td>
                     </tr>
                 </tr>
                 </tbody>
+                </table>
+                <br></br><br></br><br></br><br></br><br></br><br></br>
                 
                 {(() => {
                     switch (this.state.actualizar) {
                         case "DATOS":
                             return (
                                 <div>
-                                    <DatosActualizadosAlumno
+                                    <DatosAlmacenadosAlumno
                                         cancel={this.cancel}
-                                        statusBoleta={null}
                                         clase="datosAlumno"
                                         statusBtnCancel= "true"
                                         />

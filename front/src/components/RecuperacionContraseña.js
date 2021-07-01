@@ -1,13 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect,Link } from 'react-router-dom';
-import md5 from 'md5';
 
 class RecuperacionContraseña extends React.Component{
 
     cambioRef = React.createRef();
-
-
 
     state = {
         alumno:{},

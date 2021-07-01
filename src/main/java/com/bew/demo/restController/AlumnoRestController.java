@@ -78,7 +78,7 @@ public class AlumnoRestController {
 		return ResponseEntity.ok(alumnoDTO);		
 	}
 	@PostMapping(path = "/save", consumes = "application/json")
-	public ResponseEntity<?> save(@RequestBody AlumnoDTO alumnoDTO){
+	public ResponseEntity<?> save(@RequestBody AlumnoDTO alumnoDTO)throws EmptyResultException{
 	alumnoService.saveAlumno (alumnoDTO);
 	return ResponseEntity.ok().build();
 	}

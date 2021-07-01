@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bew.demo.model.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,4 +34,14 @@ public interface UsuarioRepository extends JpaRepository <Usuario,Long>{
             value = "SELECT exists (SELECT s FROM Usuario s WHERE s.password = :password and s.email = :email)",
             nativeQuery = true)
     Boolean findByEmailPassword(@Param("email") String email,@Param("password")  String password);
+    
+    @Query(
+            value = "SELECT s FROM Usuario s WHERE s.status = NULL",
+            nativeQuery = false)
+    List<Usuario> findByStatusNULL();
+    
+    @Query(
+            value = "SELECT s FROM Usuario s WHERE s.status = :status and s.tipoUsuario = false",
+            nativeQuery = false)
+    List<Usuario> findByStatus(@Param("status")Boolean status);
 }

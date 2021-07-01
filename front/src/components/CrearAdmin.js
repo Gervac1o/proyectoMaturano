@@ -1,10 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Slider from './Slider';
 import DirectorioAdmin from './DirectorioAdmin';
-
-import md5 from 'md5';
 
 class CrearAdmin extends React.Component {
 
@@ -47,7 +43,7 @@ class CrearAdmin extends React.Component {
 
     saveAdmin = () =>{
         console.log(this.state.usuario.email + " email fuera del if")
-        if(this.state.statusEmail != "null"){
+        if(this.state.statusEmail !== "null"){
             console.log(this.state.statusEmail + " email dentro del if")
             if(this.state.statusEmail.length ){
                

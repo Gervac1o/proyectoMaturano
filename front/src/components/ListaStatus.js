@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-
 import DirectorioAdmin from './DirectorioAdmin';
 import ObtenerAlumnoPorIdUsuario from './ObtenerAlumnoPorIdUsuario';
-class ListaAlumnos extends Component{
+import ValidarAlumno from './ValidarAlumno';
+class ListaStatus extends Component{
 
     state = {
         usuarios: [],
@@ -15,7 +15,7 @@ class ListaAlumnos extends Component{
     }
 
     getUsuarios = () => {
-        axios.get("usuario/findStatus/"+true)
+        axios.get("usuario/findStatus/"+false)
             .then(response => {
                 this.setState({
                     usuarios: response.data,
@@ -29,10 +29,10 @@ render() {
        return (
         <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>Alumnos Registrados en el Sistema</strong></h1>
+            <h1><strong>Alumnos esperando Validación</strong></h1>
             <table>
-                <tbody className="centrar">
-                    <tr>
+                <tbody>
+                    <tr >
                         <th className="table_lista, table_title">Correo</th>
                         <th className="table_lista, table_title">Nombre</th>
                         <th className="table_lista, table_title">Boleta</th>
@@ -45,7 +45,9 @@ render() {
                             <td className="table_lista">{usuario.email}</td>
                             <ObtenerAlumnoPorIdUsuario
                             idAlumno={usuario.idUsuario}
-                            datos={true}
+                            />
+                            <ValidarAlumno
+                            id={usuario.idUsuario}
                             />
                         </tr>
                     </tbody>
@@ -58,18 +60,18 @@ render() {
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>No hay Alumnos Registrados</strong></h1>
+            <h1><strong>No hay Alumnos esperando Validación</strong></h1>
             </React.Fragment>
         );
     }else{
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>Alumnos Registrados en el Sistema</strong></h1>
+            <h1><strong>Alumnos esperando Validación</strong></h1>
                 <h1>Cargando... espere un momento</h1>
             </React.Fragment>
         );
     }
     }//Fin de Render
-}//Fin de Class ListaAlumnos
-export default ListaAlumnos;
+}//Fin de Class ListaStatus
+export default ListaStatus;

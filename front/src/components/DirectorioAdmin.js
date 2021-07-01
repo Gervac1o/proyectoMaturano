@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Slider from './Slider';
-import { Link, Redirect } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import logo from'../assets/images/user.png';
 const cookies = new Cookies();
@@ -51,13 +51,22 @@ class DirectorioAdmin extends Component{
 
                     <tbody >
                      <tr >
-                     <th className="table">
-                     <Link to={'/admin/Lista'} className="active">Lista de Alumnos</Link>
-                     </th>
+                     <th className="table"><div>
+                        <ul>
+                            <li>
+                                <Link to='#' className="active">Lista de Alumnos ▼</Link>
+                                <ul>
+                                    <li><Link to={'/admin/Lista'} className="active">Alumnos Registrados</Link></li>
+                                    <li><Link to={'/admin/Validar'} className="active">Alumnos por Validar</Link></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                    </th>
                         <th className="table"><div>
                         <ul>
                             <li>
-                                <Link to='#' className="active">Buscar por trámite</Link>
+                                <Link to='#' className="active">Buscar por trámite ▼</Link>
                                 <ul>
                                    
                                     <li><Link to={'/admin/BuscarDictamen'} className="active">DICTAMEN DE 70%</Link></li>
@@ -73,7 +82,7 @@ class DirectorioAdmin extends Component{
                                 <div>
                                 <ul>
                                     <li>
-                                        <Link to='#' className="active">Buscar Alumno</Link>
+                                        <Link to='#' className="active">Buscar Alumno ▼</Link>
                                         <ul>
                                             <li><Link to={'/admin/BuscarNombre'} className="active">BUSCAR POR NOMBRE</Link></li>
                                             <li><Link to={'/admin/BuscarBoleta'} className="active">BUSCAR POR BOLETA</Link></li>
@@ -86,15 +95,24 @@ class DirectorioAdmin extends Component{
                                     </ul>
                                 </div>
                             </th>
-                            <th className="table"><Link to='/admin/Crearadmin' className = "active">Crear Administrador</Link></th>
-                             {/* <th className="table"><Link to='/admin/MisDatosAdmin' className = "active">Datos de Admin</Link></th>*/}
-                            {/*<th className="table"><button id ="table-btn" onClick={this.cerrarSesion}>cerrar sesion</button></th>*/}
-                     <th className="table" >
+                    <th className="table"><div>
+                        <ul>
+                            <li>
+                                <Link to='#' className="active">Administradores ▼</Link>
+                                <ul>
+                                    <li><Link to={'/admin/Crearadmin'} className="active">Crear Administrador</Link></li>
+                                    <li><Link to={'/admin/Admins'} className="active">Lista de Administradores</Link></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                    </th>
+                    <th className="table" >
                          <div >
                         
                         <ul>
                             <li>
-                                <Link to='#' className="active">{cookies.get('nombre')}...</Link>
+                                <Link to='#' className="active">{cookies.get('nombre')}... ▼</Link>
                                 <ul>
                                    
                                     <li className="active" ><Link to='/admin/MisDatosAdmin' className = "active">Configuración</Link></li>
