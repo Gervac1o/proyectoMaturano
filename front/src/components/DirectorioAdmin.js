@@ -72,7 +72,7 @@ class DirectorioAdmin extends Component{
                                     <li><Link to={'/admin/BuscarDictamen'} className="active">DICTAMEN DE 70%</Link></li>
                                     <li><Link to={'/admin/BuscarLiberacion'} className="active">LIBERACIÓN EXTEMPORANEA</Link></li>
                                     <li><Link to={'/admin/BuscarBaja'} className="active">BAJA DE SERVICIO SOCIAL</Link></li>
-                                    <li><Link to={'/admin/BuscarServicio'} className="active">SERVICIO SOCIAL</Link></li>
+                                    <li><Link to={'/admin/BuscarServicio'} className="active">PRE SERVICIO SOCIAL</Link></li>
                                 </ul>
                             </li>
                         </ul>
@@ -89,6 +89,7 @@ class DirectorioAdmin extends Component{
                                             <li><Link to={'/admin/BuscarICA'} className="active">INGENIERÍA EN CONTROL Y AUTOMATIZACIÓN</Link></li>
                                             <li><Link to={'/admin/BuscarICE'} className="active">INGENIERÍA EN COMUNICACIONES Y ELECTRÓNICA</Link></li>
                                             <li><Link to={'/admin/BuscarIE'} className="active">INGENIERÍA ELÉCTRICA</Link></li>
+                                            <li><Link to={'/admin/BuscarIF'} className="active">INGENIERÍA FOTÓNICA</Link></li>
                                             <li><Link to={'/admin/BuscarISISA'} className="active">INGENIERÍA EN SISTEMAS AUTOMOTRICES</Link></li>
                                         </ul>
                                         </li>

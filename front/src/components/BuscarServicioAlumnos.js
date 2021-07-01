@@ -98,7 +98,7 @@ render() {
        return (
         <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>SERVICIO SOCIAL</strong></h1>
+            <h1><strong>PRE SERVICIO SOCIAL</strong></h1>
             <br></br>
             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                 <option value="TODOS">TODOS</option>
@@ -270,7 +270,7 @@ render() {
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>SERVICIO SOCIAL</strong></h1>
+            <h1><strong>PRE SERVICIO SOCIAL</strong></h1>
             <br></br>
             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                 <option value="TODOS">TODOS</option>
@@ -289,7 +289,7 @@ render() {
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>SERVICIO SOCIAL</strong></h1>
+            <h1><strong>PRE SERVICIO SOCIAL</strong></h1>
             <br></br>
             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                 <option value="TODOS">TODOS</option>
