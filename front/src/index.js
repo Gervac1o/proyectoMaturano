@@ -27,6 +27,7 @@ import PdfServicio from './components/PdfServicio';
 import BuscarICE from './components/BuscarICE';
 import BuscarICA from './components/BuscarICA';
 import BuscarIE from './components/BuscarIE';
+import BuscarIF from './components/BuscarIF';
 import BuscarISISA from './components/BuscarISISA';
 import ValidacionAlumno from './components/ValidacionAlumno';
 import DirectorioArchivosAlumno from './components/DirectorioArchivosAlumno';
@@ -38,7 +39,6 @@ import BuscarServicioAlumnos from './components/BuscarServicioAlumnos';
 import Default from "./components/Default";
 import ListaStatus from './components/ListaStatus';
 import ListaAdministradores from './components/ListaAdministradoes';
-
 
 ReactDOM.render(
     <React.StrictMode>
@@ -60,6 +60,7 @@ ReactDOM.render(
                 <Route exact path="/admin/BuscarICE" component={BuscarICE}/>
                 <Route exact path="/admin/BuscarICA" component={BuscarICA}/>
                 <Route exact path="/admin/BuscarIE" component={BuscarIE}/>
+                <Route exact path="/admin/BuscarIF" component={BuscarIF}/>
                 <Route exact path='/admin/BuscarISISA' component={BuscarISISA}/>
                 <Route exact path="/admin/BuscarDictamen" component={BuscarDictamenAlumnos}/>
                 <Route exact path="/admin/BuscarBaja" component={BuscarBajaAlumnos}/>

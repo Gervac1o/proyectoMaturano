@@ -119,7 +119,7 @@ class DirectorioArchivosAlumno extends Component {
                         </tr>
                         <br/>
                         <tr>
-                            <td><button class="btn" id= "btn-table"  onClick={this.tramite2} > Liberacion Extemporanea</button></td>
+                            <td><button class="btn" id= "btn-table"  onClick={this.tramite2} > Liberación Extemporanea</button></td>
                         </tr>
                         <br/>
                         <tr>
@@ -127,7 +127,7 @@ class DirectorioArchivosAlumno extends Component {
                         </tr>
                         <br/>
                         <tr>
-                            <td><button class="btn" id= "btn-table" onClick={this.tramite4} > Servicio Social</button></td>
+                            <td><button class="btn" id= "btn-table" onClick={this.tramite4} > PRE REGISTRO</button></td>
                         </tr>
                         <br/>
                     </tr>
