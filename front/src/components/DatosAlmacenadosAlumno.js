@@ -152,6 +152,7 @@ class DatosAlmacenadosAlumno extends React.Component {
                                 ELECTRÓNICA
                             </option>
                             <option value="INGENIERÍA ELÉCTRICA">INGENIERÍA ELÉCTRICA</option>
+                            <option value="INGENIERÍA FOTÓNICA">INGENIERÍA FOTÓNICA</option>
                             <option value="INGENIERÍA EN SISTEMAS AUTOMOTRICES">INGENIERÍA EN SISTEMAS AUTOMOTRICES
                             </option>
                         </select>

@@ -233,6 +233,7 @@ class DatosAlumno extends React.Component {
                             <option value="INGENIERÍA EN CONTROL Y AUTOMATIZACIÓN">INGENIERÍA EN CONTROL Y AUTOMATIZACIÓN</option>
                             <option value="INGENIERÍA EN COMUNICACIONES Y ELECTRÓNICA">INGENIERÍA EN COMUNICACIONES Y ELECTRÓNICA</option>
                             <option value="INGENIERÍA ELÉCTRICA">INGENIERÍA ELÉCTRICA</option>
+                            <option value="INGENIERÍA FOTÓNICA">INGENIERÍA FOTÓNICA</option>
                             <option value="INGENIERÍA EN SISTEMAS AUTOMOTRICES">INGENIERÍA EN SISTEMAS AUTOMOTRICES</option>
                         </select>
                     </div>
