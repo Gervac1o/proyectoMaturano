@@ -100,7 +100,7 @@ class VerDatosServicio extends Component{
                                         <React.Fragment>
                                         <a id="state_processing">EN PROCESO</a>
                                         <div>
-                                            <strong>Fecha de Registro:</strong> {this.state.servicio.revisado}
+                                            <strong>Seguimiento:</strong> {this.state.servicio.revisado}
                                         </div>
                                         </React.Fragment>
                                     ); 
@@ -110,7 +110,7 @@ class VerDatosServicio extends Component{
                                         <React.Fragment>
                                         <a id="state_finished">TERMINADO</a>
                                         <div>
-                                            <strong>Fecha de Registro:</strong> {this.state.servicio.revisado}
+                                            <strong>Seguimiento:</strong> {this.state.servicio.revisado}
                                         </div>
                                         </React.Fragment>   
                                     );
@@ -119,7 +119,7 @@ class VerDatosServicio extends Component{
                                         <React.Fragment>
                                         <a id="state_rejected">RECHAZADO</a>
                                         <div>
-                                            <strong>Fecha de Registro:</strong> {this.state.servicio.revisado}
+                                            <strong>Seguimiento:</strong> {this.state.servicio.revisado}
                                         </div>
                                         </React.Fragment> 
                                     )
@@ -144,7 +144,7 @@ class VerDatosServicio extends Component{
                 <div className="center">
                         <div id="sidebar" className="servicioCenter">
                             <div >
-                                <strong>No tienes datos disponibles, registralos para empezar con tu documentación PRE SERVICIO SOCIAL.</strong>
+                                <strong>No tienes datos disponibles, registralos para empezar con tu documentación de PRE REGISTRO.</strong>
                             </div>
                         </div>          
             </div>

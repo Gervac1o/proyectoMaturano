@@ -204,7 +204,7 @@ class AdminServicioArchivos extends React.Component {
                 <div className="center">
                             <div id="sidebar" className="archivosAdminCenter">
                             <br />
-                            <strong>SERVICIO SOCIAL</strong>
+                            <strong>PRE REGISTRO</strong>
                             <div>
                             <br/>
                           
@@ -221,10 +221,7 @@ class AdminServicioArchivos extends React.Component {
                                 </div>
                                 <div>
                                 <strong>Semestre:</strong> {this.state.servicio.semestre}
-                                </div>
-                                <div>
-                                <strong>Correo electónico:</strong> {this.state.usuario.email}
-                                </div>        
+                                </div>       
                                 <div>
                                     <strong>Revisado por: </strong> {this.state.servicio.revisado}
                                 </div>

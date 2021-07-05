@@ -72,7 +72,7 @@ class DirectorioAdmin extends Component{
                                     <li><Link to={'/admin/BuscarDictamen'} className="active">DICTAMEN DE 70%</Link></li>
                                     <li><Link to={'/admin/BuscarLiberacion'} className="active">LIBERACIÓN EXTEMPORANEA</Link></li>
                                     <li><Link to={'/admin/BuscarBaja'} className="active">BAJA DE SERVICIO SOCIAL</Link></li>
-                                    <li><Link to={'/admin/BuscarServicio'} className="active">PRE SERVICIO SOCIAL</Link></li>
+                                    <li><Link to={'/admin/BuscarServicio'} className="active">PRE REGISTRO</Link></li>
                                 </ul>
                             </li>
                         </ul>
