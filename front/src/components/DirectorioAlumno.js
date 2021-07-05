@@ -49,9 +49,9 @@ class DirectorioAlumno extends Component{
                 <tbody>
                     <tr>
                         <th className="table"><Link to='/user/CrearDictamen' className = "active">Dictamen de 70%</Link></th>
-                        <th className="table"><Link to='/user/CrearLiberacion' className = "active">Liberacion Extemporanea</Link></th>
+                        <th className="table"><Link to='/user/CrearLiberacion' className = "active">Liberación Extemporanea</Link></th>
                         <th className="table"> <Link to='/user/CrearBaja' className = "active">Baja de Servicio Social</Link></th>
-                        <th className="table"><Link to='/user/CrearServicio' className = "active">Pre Servicio Social</Link></th>
+                        <th className="table"><Link to='/user/CrearServicio' className = "active">Pre Registro</Link></th>
 
                        
                     <th className="table" >
