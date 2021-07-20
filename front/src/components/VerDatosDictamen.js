@@ -36,6 +36,7 @@ class VerDatosDictamen extends Component{
             return(
                 <div className="center">
                         <div id="sidebar" className="dictamenCenter">
+                        <strong>Dictamen de 70% de créditos.</strong><br/>
                         <strong>Estado de Trámite: </strong>
                         {(() => {  
                         switch (this.state.dictamen.estado){
@@ -86,12 +87,12 @@ class VerDatosDictamen extends Component{
                                 <strong>Semestre:</strong> {this.state.dictamen.semestre}
                             </div>
                             <br/>
-                         <PdfDictamenAlumno
+                        {/* <PdfDictamenAlumno
                             creditos={this.state.dictamen.porcentajeCreditos}
                             semestre={this.state.dictamen.semestre}
                             email={this.state.email}
                             idAlumno={this.state.idAlumno}
-                            />
+                        />*/}
                         </div>          
             </div>
             );
@@ -100,7 +101,7 @@ class VerDatosDictamen extends Component{
                 <div className="center">
                         <div id="sidebar" className="dictamenCenter">
                             <div>
-                                <strong>No tienes datos disponibles, registralos para empezar con tu documentación DICTAMEN DE MENOS DE 70% DE CREDITOS</strong>
+                                <strong>No tienes datos disponibles, registralos para empezar con tu documentación.</strong>
                             </div>
                         </div>          
             </div>

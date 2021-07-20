@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import {Link} from 'react-router-dom';
 
 const cookies = new Cookies();
 
@@ -33,6 +34,7 @@ class VerDatosServicio extends Component{
                 return(
                     <div className="center">
                             <div id="sidebar" className="servicioCenter">
+                            <strong>Constancia de créditos.</strong><br/>
                             <strong>Estado de Trámite: </strong>
                                 {(() => {  
                                 switch (this.state.servicio.estado){
@@ -88,6 +90,8 @@ class VerDatosServicio extends Component{
                 return(
                     <div className="center">
                             <div id="sidebar" className="servicioCenter">
+                            <strong>Constancia de créditos.</strong><br/>
+                            <strong>Estado de Trámite: </strong>
                             {(() => {  
                                 switch (this.state.servicio.estado){
                                 case "NUEVO":
@@ -144,7 +148,34 @@ class VerDatosServicio extends Component{
                 <div className="center">
                         <div id="sidebar" className="servicioCenter">
                             <div >
-                                <strong>No tienes datos disponibles, registralos para empezar con tu documentación de PRE REGISTRO.</strong>
+                                <p style={{textAlign:'left'}}>Primero debes solicitar tu constancia de creditos 
+                                para realizar el servicio social.<br/>
+                                <strong> Requisitos.</strong> 
+                                <br/><br/>
+                                Para alumnos: <br/>
+                                -Debes de haber cerrado tu inscripción.<br/>
+                                -Tener mínimo 70% de créditos.<br/>
+                                -Si tienes 68% de créditos, puedes tramitar dictamen de inicio.
+                                </p>
+                                <div style={{textAlign:'left',}}>  
+                                <Link to='/user/CrearDictamen' className='link' >Solicitar Dictamen de menos del 70% de creditos.</Link>
+                                </div>
+                              
+                                <p style={{textAlign:'left'}}>
+                               
+                                -Debes tener TODAS LAS MATERIAS CURSADAS del primer semestre al sexto 
+                                sin ninguna reprobada.<br/><br/>
+                                Para pasantes:<br/>
+                                -Puedes solicitar constancia de créditos si eres egresado en un periodo menor 
+                                de año y medio.
+                                -O presentar carta de pasante (100% de créditos).
+                                </p> <trong style={{textAlign:'left'}}  className='link'>Nota: </trong> 
+                                <p style={{textAlign:'left'}}>
+                                Debes tener un lugar asegurado para realizar el servicio social en alguna empresa, escuela, departamento o profesor.
+                                Para lo cual necesitas ponerte en contacto para asegurar que tengan lugar en su programa a distancia 
+                                (Ver apartado de vacantes en la página de ESIME Zacatenco/Estudiantes/Servicio Social o en la página servicio.social.ipn.mx)
+
+                                  </p>
                             </div>
                         </div>          
             </div>

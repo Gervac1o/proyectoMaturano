@@ -25,6 +25,7 @@ class ServicioSocial extends React.Component {
         statusResponsable: null,
         servicio: {
             semestre:"SEPTIMO", 
+            estado:null,
         },
 
         status:"false",
@@ -41,23 +42,10 @@ class ServicioSocial extends React.Component {
         .then(res =>{
             this.setState({
                 servicio: res.data,
-                //estado: res.data.idServicio,
+                estado: res.data.estado
             });
         })
-        .then(res =>{
-            this.setState({
-                estado: this.state.servicio.estado,
-                servicio: {
-                    semestre: null,
-                    responsableDirecto: null,
-                    estado: "NUEVO",
-                    fechaRegistro: null,
-                    revisado: null,
-                    idAlumno: null,
-                    idServicio: null
-                }
-            });
-        })
+
        
        
     }//Fin de search Servicio
@@ -93,36 +81,61 @@ class ServicioSocial extends React.Component {
         if(this.state.status === 'true'){
             window.location.reload(false);
         }
-
+        if(this.state.servicio.estado !== "FINALIZADO"){
         return (
             <div className="center">
             <HeaderDEyAE/>
                 <DirectorioAlumno />
+                <SubirServicio/>
+               
                         <div id="sidebar" className="servicioLeft">
-                            <div>
-                                <label htmlFor="semestre" className="text_login">Semestre</label>
-                                <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
-                                <option label="" ></option>
-                                    <option value="SEPTIMO">SEPTIMO</option>
-                                    <option value="OCTAVO">OCTAVO</option>
-                                    <option value="NOVENO">NOVENO</option>
-                                    <option value="EGRESADO">EGRESADO</option>
-                                    </select>
-                            </div>
-                            <br/>
+                            <br/><strong>Constancia de créditos</strong>
                             {(() => {
                                 switch(this.state.estado){
                                     case "NUEVO":
                                     return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                       
+                                    <div>
+                                        <label htmlFor="semestre" className="text_login">Semestre</label>
+                                        <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
+                                        <option label="" ></option>
+                                            <option value="SEPTIMO">SEPTIMO</option>
+                                            <option value="OCTAVO">OCTAVO</option>
+                                            <option value="NOVENO">NOVENO</option>
+                                            <option value="EGRESADO">EGRESADO</option>
+                                            </select>
+                                            <br/><br/>
+                                            <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                    </div>
                                     );
                                     case undefined:
                                     return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                        <div>
+                                        <label htmlFor="semestre" className="text_login">Semestre</label>
+                                        <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
+                                        <option label="" ></option>
+                                            <option value="SEPTIMO">SEPTIMO</option>
+                                            <option value="OCTAVO">OCTAVO</option>
+                                            <option value="NOVENO">NOVENO</option>
+                                            <option value="EGRESADO">EGRESADO</option>
+                                            </select><br/><br/>
+                                            <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                    </div>
                                     );
                                     case null:
                                     return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                        <div>
+                                        <label htmlFor="semestre" className="text_login">Semestre</label>
+                                        <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
+                                        <option label="" ></option>
+                                            <option value="SEPTIMO">SEPTIMO</option>
+                                            <option value="OCTAVO">OCTAVO</option>
+                                            <option value="NOVENO">NOVENO</option>
+                                            <option value="EGRESADO">EGRESADO</option>
+                                            </select>
+                                            <br/><br/>
+                                            <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                    </div>
                                     );
                                     default:
                                         break;
@@ -130,11 +143,57 @@ class ServicioSocial extends React.Component {
                             })()}
                            {/* <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>*/}
                           </div>
-                          <SubirServicio/>
+                        
                           <VerDatosServicio/>
+                          
                           <Footer/>
             </div>
         );
     }
+    else{
+        return (
+            <div className="center">
+            <HeaderDEyAE/>
+                <DirectorioAlumno />
+                <SubirServicio/>
+                   
+                        <div id="sidebar" className="servicioLeft" >
+                            <div > 
+                                <strong>Solicitar fecha de inicio y termino para el servicio social</strong>
+                                <label htmlFor="semestre" className="text_login">Lugar donde se realizará SS.</label>
+                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa lugar donde se realiza el servicio " />
+                                <label htmlFor="semestre" className="text_login">Responsable directo</label>
+                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa el nombre del responsable"/>
+                                <label htmlFor="semestre" className="text_login">Nombre del programa</label>
+                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa el nombre del programa de servicio social"/>            
+                                <label htmlFor="semestre" className="text_login">Se realizará dentro de ESIMEZ?</label>
+                                <select name="semestre" className="input_login" >
+                                <option label="" ></option>
+                                    <option value="SEPTIMO">Si</option>
+                                    <option value="OCTAVO">No</option>
+                                    </select>
+                                </div>
+                            <br/>
+                            {(() => {
+                                switch(this.state.estado){
+                                    case "FINALIZADO":
+                                    return (
+                                        <button className="btn" onClick = {this.saveServicio}>Solicitar fechas</button>
+                                    );
+                                }
+                            })()}
+                           {/* <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>*/}
+                          </div>
+                        
+                          <VerDatosServicio/>
+                          
+                          <Footer/>
+            </div>
+        );
+                              
+    }
+      
+    
+}
 }
 export default ServicioSocial;

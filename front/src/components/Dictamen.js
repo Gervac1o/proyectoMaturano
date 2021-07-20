@@ -35,22 +35,11 @@ class Dictamen extends React.Component {
         axios.get("user/dictamen/findIdAlumno/" + this.dictamenRef)
         .then(res =>{
             this.setState({
-                dictamen: res.data
+                dictamen: res.data,
+                statusCreditos:"true"
             });
-        })
-        .then(res => {
-            this.setState({
-                estado: this.state.dictamen.estado,
-                dictamen:{
-                    porcentajeCreditos: null,
-                    semestre: "SEPTIMO",
-                    estado: "NUEVO",
-                    fechaRegistro: null,
-                    revisado: null,
-                    idAlumno: null,
-                    idDictamen: null
-                }
-            });
+        
+        
         });
     }//Fin de search Dictamen
     changeState = () => {
@@ -75,7 +64,7 @@ class Dictamen extends React.Component {
             .then(res => {
                 this.setState(
                     {
-                        statusCreditos: "true"
+                        estado: true
                     }
                 );
                
@@ -91,9 +80,8 @@ class Dictamen extends React.Component {
     render() {
        
             
-        if (this.state.statusCreditos === "true") {
+        if (this.state.estado === true) {
             window.location.reload();
-       
         }
         return (
             <div className="center">
@@ -101,29 +89,24 @@ class Dictamen extends React.Component {
                 <DirectorioAlumno />
                         <div id="sidebar" className="servicioLeft">
                             <div>
-                                <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
-                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>
-                                     
+                            <strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong>
                             </div>
-                            <br></br>
                             {(() => {
-                                switch(this.state.estado){
+                                switch(this.state.dictamen.estado){
                                     case "NUEVO":
-                                    return (
-                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-                                    );
-                                    case undefined:
-                                    return (
-                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-                                    );
-                                    case null:
-                                    return (
-                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-                                    );
-                                    default:
-                                        break;
+                                        return(
+                                            <div>
+                                            <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
+                                            <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
+                                            <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
+                                            
+                                           </div>
+                                        )
+
                                 }
                             })()} 
+                            <br></br>
+
                           </div>
                           <SubirDictamen/>
                           <VerDatosDictamen/>
