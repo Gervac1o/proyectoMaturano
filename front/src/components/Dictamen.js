@@ -22,7 +22,9 @@ class Dictamen extends React.Component {
     state = {
         idAlumno: cookies.get('idAlumno'),
         statusCreditos: "false",
-        dictamen: {},
+        dictamen: {
+            estado: "NUEVO",
+        },
         status: "null",
         estado: null
     };
@@ -46,7 +48,7 @@ class Dictamen extends React.Component {
         this.setState({
             dictamen: {
                 porcentajeCreditos: this.creditosRef.current.value,
-                semestre: "SEPTIMO",
+                semestre: "SEXTO",
                 estado: "NUEVO",
                 fechaRegistro: this.fechaRegistroRef,
                 revisado: null,
@@ -93,15 +95,34 @@ class Dictamen extends React.Component {
                             </div>
                             {(() => {
                                 switch(this.state.dictamen.estado){
+                                    case null:
+                                        return(
+                                            <div>
+                                            <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
+                                            <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
+                                            <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
+                                            <button className="btn" onClick = {this.saveDictamen}>Solicitar dictamen</button>
+                                           </div>
+                                        )
                                     case "NUEVO":
                                         return(
                                             <div>
                                             <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
                                             <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
                                             <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
-                                            
+                                            <button className="btn" onClick = {this.saveDictamen}>Solicitar dictamen</button>
                                            </div>
-                                        )
+                                        );
+
+                                    case undefined:
+                                        return(
+                                            <div>
+                                            <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
+                                            <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
+                                            <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
+                                            <button className="btn" onClick = {this.saveDictamen}>Solicitar dictamen</button>
+                                           </div>
+                                        );
 
                                 }
                             })()} 

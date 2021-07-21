@@ -102,22 +102,22 @@ class SubirServicio extends React.Component {
                                                 <td className="table_lista">{lista1.comentario}</td>
                                                 <td><Link to={'/doc/PdfServicio/' + lista1.idDoc}target="_blank" id="btn_watch">Visualizar</Link></td>
                                                 <td><a  href={ "/docServicio/getDoc/" + lista1.idDoc} download  id="btn_downLoad">Descargar</a></td>
-                                              {/*  <td><BorrarDoc
+                                               {/*<td><BorrarDoc
                                                 idLista={lista1.idLista}
                                                 idDoc={lista1.idDoc}
                                                 url= "docServicio/deleteDoc/"
                                                 redirect= "CrearServicio"
-                                              /></td> */}
+                                               /></td> */}
                                             </tr>
                                     </tbody>
                                     )}
                                     </table>
                                     <br/>
                                     <br/>
-                                 {/*    <div  >
+                                     <div  >
                                  <label for="file" id = "input-size"  >{this.state.file.name}</label>
                                     <input type="file" name = "file" id = "file"  onChange={this.fileChange} />
-                                    </div>*/}
+                                    </div>
                                     {(() => {
                                     switch(this.state.statusArchivo){   
                                         case false:
@@ -131,7 +131,7 @@ class SubirServicio extends React.Component {
                                     })()}
                                 </div>
                                 <br/>
-                                {/*<button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>*/}
+                                <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>
                         </div>                
             </div>
         );

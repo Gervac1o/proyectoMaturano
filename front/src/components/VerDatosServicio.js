@@ -82,6 +82,33 @@ class VerDatosServicio extends Component{
                                     <strong>Semestre:</strong> {this.state.servicio.semestre}
                                 </div>
                              <br/>
+                             {(() => { 
+                                  switch (this.state.servicio.estadoFechas){
+                                    case "NUEVO":
+                                        return (
+                                            <div>
+                                            <strong>Fechas de inicio y término del servicio social.</strong><br/>
+                                            <strong>Estado de Trámite: </strong>
+                                            <a id="state_new">NUEVO</a>
+                                            </div>
+                                        );
+                                    case "FINALIZADO":
+                                        return(
+                                            <div>
+                                            <strong>Fechas de inicio y término del servicio social.</strong><br/>
+                                            <strong>Estado de Trámite: </strong>
+                                            <a id="state_finished">TERMINADO</a><br/>
+                                            <strong>Fecha de Inicio:</strong> {this.state.servicio.fechaInicio}<br/>
+                                            <strong>Fecha de Término:</strong> {this.state.servicio.fechaFin}<br/>
+                                            <p>
+                                            DOCUMENTACIÓN EN UN SOLO PDF, CON EL ORDEN SIGUIENTE
+                                            CONSTANCIA DE CRÉDITOS, ACTA DE NACIMIENTO, CURP Y DERECHO DE VIGENCIA DEL IMSS.
+
+                                            </p>
+                                        </div>
+                                        );
+                            }
+                        })()}
                
                             </div>          
                 </div>

@@ -36,7 +36,7 @@ class VerDatosDictamen extends Component{
             return(
                 <div className="center">
                         <div id="sidebar" className="dictamenCenter">
-                        <strong>Dictamen de 70% de créditos.</strong><br/>
+                        <strong>Dictamen de menos de 70% de créditos.</strong><br/>
                         <strong>Estado de Trámite: </strong>
                         {(() => {  
                         switch (this.state.dictamen.estado){

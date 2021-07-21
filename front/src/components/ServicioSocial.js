@@ -6,6 +6,8 @@ import Footer from './Footer';
 import Cookies from 'universal-cookie';
 import SubirServicio from './SubirServicio';
 import VerDatosServicio from './VerDatosServicio';
+import Fechas from './Fechas';
+import SaveDictamen from './SaveDictamen';
 
 const cookies = new Cookies();
 
@@ -18,14 +20,18 @@ class ServicioSocial extends React.Component {
     servicioRef = cookies.get('idAlumno');
     fechaRegistroRef = React.createRef();
     fechaRegistroRef = new Date().toLocaleDateString();
+    lugarRef = React.createRef();
+    responsableDirectoRef = React.createRef();
+    nombreProgramaRef = React.createRef();
 
 
     state = {
         idAlumno: cookies.get('idAlumno'),
         statusResponsable: null,
         servicio: {
-            semestre:"SEPTIMO", 
+            semestre:null, 
             estado:null,
+            responsableDirecto:"null",
         },
 
         status:"false",
@@ -35,38 +41,56 @@ class ServicioSocial extends React.Component {
 
     componentWillMount = () =>{
         this.searchServicio();
+       
     }
 
     searchServicio = () => {
-        axios.get("servicioSocial/findIdAlumno/"+ this.servicioRef)
-        .then(res =>{
-            this.setState({
-                servicio: res.data,
-                estado: res.data.estado
-            });
-        })
+       
+            axios.get("servicioSocial/findIdAlumno/"+ this.servicioRef)
+            .then(res =>{
+                this.setState({
+                    servicio: res.data,
+                    estado: res.data.estado
+                });
+            })
+        
+
+       
 
        
        
     }//Fin de search Servicio
 
     changeState = () => {
+
         this.setState({
             servicio: {
                 semestre: this.semestreRef.current.value,
-                responsableDirecto: "",
+                responsableDirecto: "null",
                 estado: "NUEVO",
                 fechaRegistro: this.fechaRegistroRef,
                 revisado: "null",
                 idAlumno: this.state.idAlumno,
-                idServicio: this.state.idAlumno
+                idServicio: this.state.idAlumno,
+                cartaCompromiso:"false",
+                documentos:"false",
+                fechaFin: "false",
+                fechaInicio:"false",
+                lugar: "false",
+                nombrePrograma:"false",
             }
         });
-
+    
     }
+   
 
     saveServicio = (e) => {
-       // this.changeState();
+        this.changeState();
+
+       console.log( this.state.servicio.semestre)
+
+       if(this.state.servicio.semestre !== undefined){
+
             axios.post( "servicioSocial/save", this.state.servicio)
             .then(res => {
                 this.setState(
@@ -75,19 +99,21 @@ class ServicioSocial extends React.Component {
                     }
                 );
             });
-
+     }
+        
     }//Fin de funcion saveServicio()
+
     render() {
         if(this.state.status === 'true'){
             window.location.reload(false);
         }
-        if(this.state.servicio.estado !== "FINALIZADO"){
+        if(this.state.servicio.estado !== "FINALIZADO" ){
         return (
             <div className="center">
             <HeaderDEyAE/>
                 <DirectorioAlumno />
                 <SubirServicio/>
-               
+
                         <div id="sidebar" className="servicioLeft">
                             <br/><strong>Constancia de créditos</strong>
                             {(() => {
@@ -106,6 +132,8 @@ class ServicioSocial extends React.Component {
                                             </select>
                                             <br/><br/>
                                             <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                            <br/><br/>
+                                            <SaveDictamen/>
                                     </div>
                                     );
                                     case undefined:
@@ -120,6 +148,8 @@ class ServicioSocial extends React.Component {
                                             <option value="EGRESADO">EGRESADO</option>
                                             </select><br/><br/>
                                             <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                            <br/><br/>
+                                            <SaveDictamen/>
                                     </div>
                                     );
                                     case null:
@@ -135,13 +165,14 @@ class ServicioSocial extends React.Component {
                                             </select>
                                             <br/><br/>
                                             <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                            <br/><br/>
+                                            <SaveDictamen/>
                                     </div>
                                     );
                                     default:
                                         break;
                                 }
                             })()}
-                           {/* <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>*/}
                           </div>
                         
                           <VerDatosServicio/>
@@ -156,34 +187,9 @@ class ServicioSocial extends React.Component {
             <HeaderDEyAE/>
                 <DirectorioAlumno />
                 <SubirServicio/>
-                   
-                        <div id="sidebar" className="servicioLeft" >
-                            <div > 
-                                <strong>Solicitar fecha de inicio y termino para el servicio social</strong>
-                                <label htmlFor="semestre" className="text_login">Lugar donde se realizará SS.</label>
-                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa lugar donde se realiza el servicio " />
-                                <label htmlFor="semestre" className="text_login">Responsable directo</label>
-                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa el nombre del responsable"/>
-                                <label htmlFor="semestre" className="text_login">Nombre del programa</label>
-                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa el nombre del programa de servicio social"/>            
-                                <label htmlFor="semestre" className="text_login">Se realizará dentro de ESIMEZ?</label>
-                                <select name="semestre" className="input_login" >
-                                <option label="" ></option>
-                                    <option value="SEPTIMO">Si</option>
-                                    <option value="OCTAVO">No</option>
-                                    </select>
-                                </div>
-                            <br/>
-                            {(() => {
-                                switch(this.state.estado){
-                                    case "FINALIZADO":
-                                    return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar fechas</button>
-                                    );
-                                }
-                            })()}
-                           {/* <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>*/}
-                          </div>
+               
+                   <Fechas/>
+
                         
                           <VerDatosServicio/>
                           
