@@ -7,7 +7,7 @@ import Cookies from 'universal-cookie';
 import SubirServicio from './SubirServicio';
 import VerDatosServicio from './VerDatosServicio';
 import Fechas from './Fechas';
-import SaveDictamen from './SaveDictamen';
+
 
 const cookies = new Cookies();
 
@@ -33,7 +33,6 @@ class ServicioSocial extends React.Component {
             estado:null,
             responsableDirecto:"null",
         },
-
         status:"false",
         estado: null
 
@@ -80,12 +79,10 @@ class ServicioSocial extends React.Component {
                 nombrePrograma:"false",
             }
         });
-    
     }
-   
 
     saveServicio = (e) => {
-        this.changeState();
+        //this.changeState();
 
        console.log( this.state.servicio.semestre)
 
@@ -112,7 +109,9 @@ class ServicioSocial extends React.Component {
             <div className="center">
             <HeaderDEyAE/>
                 <DirectorioAlumno />
-                <SubirServicio/>
+                <SubirServicio
+                borrar = {this.state.servicio.estadoFechas}
+                         />
 
                         <div id="sidebar" className="servicioLeft">
                             <br/><strong>Constancia de créditos</strong>
@@ -133,7 +132,7 @@ class ServicioSocial extends React.Component {
                                             <br/><br/>
                                             <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
                                             <br/><br/>
-                                            <SaveDictamen/>
+                                           
                                     </div>
                                     );
                                     case undefined:
@@ -149,7 +148,7 @@ class ServicioSocial extends React.Component {
                                             </select><br/><br/>
                                             <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
                                             <br/><br/>
-                                            <SaveDictamen/>
+                                            
                                     </div>
                                     );
                                     case null:
@@ -166,7 +165,7 @@ class ServicioSocial extends React.Component {
                                             <br/><br/>
                                             <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
                                             <br/><br/>
-                                            <SaveDictamen/>
+                                            
                                     </div>
                                     );
                                     default:
@@ -186,13 +185,10 @@ class ServicioSocial extends React.Component {
             <div className="center">
             <HeaderDEyAE/>
                 <DirectorioAlumno />
-                <SubirServicio/>
-               
+                <SubirServicio
+                borrar = {this.state.servicio.estadoFechas}/>
                    <Fechas/>
-
-                        
                           <VerDatosServicio/>
-                          
                           <Footer/>
             </div>
         );

@@ -75,17 +75,20 @@ public class ServicioSocialServiceImpl implements ServicioSocialService {
 	
 		ServicioSocial servicio = servicioRepository.findById(servicioDTO.getIdServicio()).orElseThrow(() -> new EmptyResultException("Sin Resultados"));
 		
-		servicio.setIdServicio(servicioDTO.getIdServicio());
+		// servicio.setIdServicio(servicioDTO.getIdServicio());
 		servicio.setLugar(servicioDTO.getLugar());
 		servicio.setResponsableDirecto(servicioDTO.getResponsableDirecto());
 		servicio.setNombrePrograma(servicioDTO.getNombrePrograma());
 		servicio.setEstado(servicioDTO.getEstado());
 		servicio.setFechaRegistro(servicioDTO.getFechaRegistro());
 		servicio.setFechaInicio(servicioDTO.getFechaInicio());
+		servicio.setFechaFin(servicioDTO.getFechaFin());
 		servicio.setRevisado(servicioDTO.getRevisado());
 		servicio.setEstadoFechas(servicioDTO.getEstadoFechas());
+		servicio.setDocumentos(servicioDTO.getDocumentos());
+		servicio.setCartaCompromiso(servicioDTO.getCartaCompromiso());
 		
-		
+		System.out.println(servicioDTO.getCartaCompromiso());
 		
 		//Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 		//servicio = (mapper.map(servicioDTO, ServicioSocial.class));

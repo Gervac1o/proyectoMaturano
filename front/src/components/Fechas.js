@@ -1,11 +1,8 @@
 import React from 'react';
-import HeaderDEyAE from './HeaderDEyAE';
 import axios from 'axios';
-import DirectorioAlumno from './DirectorioAlumno';
-import Footer from './Footer';
 import Cookies from 'universal-cookie';
-import SubirServicio from './SubirServicio';
-import VerDatosServicio from './VerDatosServicio';
+import ConfirmarDocs from './ConfirmarDocs'
+import ConfirmarCarta from './ConfirmarCarta'
 
 const cookies = new Cookies();
 
@@ -47,9 +44,6 @@ class Fechas extends React.Component {
                 estado: res.data.responsableDirecto,
             });
         })
-
-       
-       
     }//Fin de search Servicio
 
     changeState = () => {
@@ -67,10 +61,9 @@ class Fechas extends React.Component {
             }
         });
     }
-   
 
     saveServicio = (e) => {
-       // this.changeState();
+        this.changeState();
             axios.patch( "servicioSocial/update", this.state.servicio)
             .then(res => {
                 this.setState(
@@ -88,13 +81,14 @@ class Fechas extends React.Component {
         return (
             <div className="center">
                     <div id="sidebar" className="servicioLeft" >
-                        <strong>Solicitar fecha de inicio y termino para el servicio social</strong>
+                        
 
                             {(() => {
                                 switch(this.state.estado){
                                     case "null":
                                     return (
                                         <div>
+                                        <strong>Solicitar fecha de inicio y termino para el servicio social</strong>
                                         <label htmlFor="lugar" className="text_login">Lugar donde se realizará SS.</label>
                                         <input type="text" className="input_login" name="lugar" placeholder="Ingresa lugar donde se realiza el servicio " ref={this.lugarRef} onChange={this.changeState}/>
                                         <label htmlFor="responsable" className="text_login">Responsable directo</label>
@@ -105,14 +99,53 @@ class Fechas extends React.Component {
                                       <button className="btn" onClick = {this.saveServicio}>Solicitar fechas</button>
                                            </div>
                                     );
-                                    default:
-                                    return(
-                                            <div></div>
-                                    );
+
+                                }
+                                switch(this.state.servicio.estadoFechas){
+                                    case "FINALIZADO":
+                                        return(
+                                            <div>
+                                            <strong>Debes subir los siguientes documentos en el apartado "Documentación Servicio Social".</strong>
+                                            <p style={{textAlign:'left'}}>
+                                            Adjuntar en un solo PDF en el orden siguiente:<br/>
+                                            1. Constancia de créditos.<br/>
+                                            2. Acta de nacimiento y CURP.<br/>
+                                            3. Constancia de vigencia de derechos del IMSS.
+                                            </p>
+                                            <strong>Una vez que subas tu documentación en el formato solicitado, da click en el siguiente botón.</strong>
+                                            <br/><br/>
+                                            <ConfirmarDocs/>
+                                            </div>
+                                        );
+                                        default:
+                                            return(
+                                                
+                                                <strong>Solicitar fecha de inicio y termino para el servicio social</strong> 
+                                            );
                                 }
                                 
                             })()}
-                           {/* <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>*/}
+                            {(() => {
+                            switch(this.state.servicio.documentos){
+                                case "ok":
+                                    return(
+                                        <div><br/>
+                                            <strong>Carta Compromiso</strong>
+                                            <p style={{textAlign:'left'}}>
+                                            1. Debes imprimir carta compromiso del SISS.<br/>
+                                            2. Revisa que tus datos sean los correctos. Firma la carta 
+                                            compromiso en la primer y segunda página donde se requiere. <br/>
+                                            3. Escaneala y subela en formato PDF en el apartado "Documentación Servicio Social".
+                                            </p>
+                                            <strong>Una vez que subas tu Carta Compromiso, da click en el siguiente botón.</strong>
+                                            <br/><br/>
+                                            <ConfirmarCarta/>
+                                        </div>
+                                    );
+                                    default:
+                                    break;
+                            }
+                        })()}
                           </div>
             </div>
         );

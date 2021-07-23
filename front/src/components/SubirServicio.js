@@ -67,6 +67,7 @@ class SubirServicio extends React.Component {
                             }
                         })
                         this.guardarLista();
+                        this.okDocs();
                     });
         }else{
             this.setState(
@@ -86,7 +87,7 @@ class SubirServicio extends React.Component {
             <div className="center">
                         <div id="sidebar" className="servicioRight">
                         <strong>DOCUMENTACIÓN SERVICIO SOCIAL</strong>
-                                <div>
+                            <div>
                                 <br/>
                                 <table>
                                     <tbody>
@@ -102,20 +103,35 @@ class SubirServicio extends React.Component {
                                                 <td className="table_lista">{lista1.comentario}</td>
                                                 <td><Link to={'/doc/PdfServicio/' + lista1.idDoc}target="_blank" id="btn_watch">Visualizar</Link></td>
                                                 <td><a  href={ "/docServicio/getDoc/" + lista1.idDoc} download  id="btn_downLoad">Descargar</a></td>
-                                               {/*<td><BorrarDoc
-                                                idLista={lista1.idLista}
-                                                idDoc={lista1.idDoc}
-                                                url= "docServicio/deleteDoc/"
-                                                redirect= "CrearServicio"
-                                               /></td> */}
+                                                <td>
+                                                     {(() => {
+                                                      switch(this.props.borrar){
+                                                        case "FINALIZADO":
+                                                        return (
+                                                        <BorrarDoc
+                                                         idLista={lista1.idLista}
+                                                         idDoc={lista1.idDoc}
+                                                         url= "docServicio/deleteDoc/"
+                                                         redirect= "CrearServicio"/>
+                                                        );
+                                                        default:
+                                                            break;
+                                            }
+                                        })()} 
+                                        </td>
                                             </tr>
                                     </tbody>
                                     )}
                                     </table>
                                     <br/>
                                     <br/>
-                                     <div  >
-                                 <label for="file" id = "input-size"  >{this.state.file.name}</label>
+                        {(() => {      
+                             switch(this.props.borrar){   
+                                case "FINALIZADO":
+                                    return(
+                                        <div>
+                                    <div  >
+                                    <label for="file" id = "input-size"  >{this.state.file.name}</label>
                                     <input type="file" name = "file" id = "file"  onChange={this.fileChange} />
                                     </div>
                                     {(() => {
@@ -124,14 +140,21 @@ class SubirServicio extends React.Component {
                                         return (
                                         <a className="warning">¡Seleccione un Archivo para Registrar!</a>
                                         );
-                                        break;
                                         default:
                                             break;
                                     }
                                     })()}
-                                </div>
-                                <br/>
-                                <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>
+                                    <br/>
+                                    <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button></div>  
+                                    ); 
+                                    default:
+                                        break; 
+                                }
+                        })()}
+
+                            </div>
+                                
+                               
                         </div>                
             </div>
         );

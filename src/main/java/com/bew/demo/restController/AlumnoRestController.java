@@ -11,11 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
+
 import com.bew.demo.dto.AlumnoDTO;
 import com.bew.demo.exception.EmptyResultException;
 import com.bew.demo.service.AlumnoService;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/alumno")
@@ -93,4 +103,29 @@ public class AlumnoRestController {
 	alumnoService.deleteAlumno(idAlumno);
 	return ResponseEntity.ok().build();
 	}
+	
+	@GetMapping("/export")
+    public void exportToCSV(HttpServletResponse response) throws IOException{
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+         
+		List<AlumnoDTO> alumnos = alumnoService.findAll();
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = {"Alumno ID", "apellido Paterno", "Apellido Materno", "Boleta", "Nombre", "Programa Academico"};
+        String[] nameMapping = {"idAlumno", "apellidoPaterno", "apellidoMaterno", "boleta", "nombre", "programaAcademico"};
+         
+        csvWriter.writeHeader(csvHeader);
+         
+        for (AlumnoDTO alumnoDTO : alumnos) {
+            csvWriter.write(alumnoDTO, nameMapping);
+        }
+         
+        csvWriter.close();
+         
+    }
 }
