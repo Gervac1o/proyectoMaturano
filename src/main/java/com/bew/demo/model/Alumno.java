@@ -50,6 +50,12 @@ public class Alumno implements Serializable{
 	@Column(name="sexo")
 	private String sexo;
 	
+	@Column(name="semestre")
+	private String semestre;
+	
+	@Column(name="email")
+	private String email;
+	
 	@Column(name="id_usuario")
 	private Long idUsuario;
 	
@@ -57,7 +63,7 @@ public class Alumno implements Serializable{
 	
 	public Alumno() {}
 	public Alumno( Long idAlumno, String nombre, String apellidoPaterno, String apellidoMaterno,
-			String boleta, String programaAcademico, String sexo, Long idUsuario) {
+			String boleta, String programaAcademico, String sexo, String semestre, String email, Long idUsuario) {
 		
 		
 		this.nombre=nombre;	
@@ -68,6 +74,8 @@ public class Alumno implements Serializable{
 		this.programaAcademico = programaAcademico;
 		this.sexo = sexo;
 		this.idUsuario=idUsuario;
+		this.semestre = semestre;
+		this.email = email;
 	
 }
 	//@ManyToOne(fetch=FetchType.LAZY)
@@ -129,6 +137,18 @@ public class Alumno implements Serializable{
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	public String getSemestre() {
+		return semestre;
+	}
+	public void setSemestre(String semestre) {
+		this.semestre = semestre;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	

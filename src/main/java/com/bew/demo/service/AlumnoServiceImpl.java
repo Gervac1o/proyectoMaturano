@@ -1,8 +1,7 @@
 package com.bew.demo.service;
 
 import java.util.ArrayList;
-
-
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +14,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import com.bew.demo.dao.AlumnoRepository;
+import com.bew.demo.dao.ServicioSocialRepository;
+import com.bew.demo.dao.UsuarioRepository;
 import com.bew.demo.dto.AlumnoDTO;
+import com.bew.demo.dto.ExportCSVDTO;
+import com.bew.demo.dto.ServicioSocialDTO;
+import com.bew.demo.dto.UsuarioDTO;
 import com.bew.demo.exception.EmptyResultException;
 import com.bew.demo.exception.MailRepetidoException;
 import com.bew.demo.model.Alumno;
+import com.bew.demo.model.ServicioSocial;
 import com.bew.demo.model.Usuario;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
@@ -33,6 +38,13 @@ public class AlumnoServiceImpl implements AlumnoService {
     @Autowired
     AlumnoRepository alumnoRepository;
 
+	@Autowired
+	ServicioSocialRepository servicioRepository;
+	
+
+	@Autowired
+	UsuarioRepository usuarioRepository;
+	
     @Override
     public List<AlumnoDTO> findAll() {
 
@@ -43,7 +55,6 @@ public class AlumnoServiceImpl implements AlumnoService {
             Mapper mapper = DozerBeanMapperBuilder.buildDefault();
             alumnoDTO.add(mapper.map(alumno, AlumnoDTO.class));
         }
-        // TODO Auto-generated method stub
         return alumnoDTO;
     }
 
@@ -199,5 +210,44 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumnoRepository.deleteById(idAlumno);
     }
 
+	@Override
+	public List<ExportCSVDTO> exportCSV(String estado) throws EmptyResultException {
+        List<ExportCSVDTO> exportCSV;
+        exportCSV = new ArrayList<>();
+        
+        List<ServicioSocial> servicioSocial = servicioRepository.findByEstado(estado);
+       
+        
+        
+     
+        
+       for(ServicioSocial servicio : servicioSocial) {
+    	   
+    	  
+    	
+           Usuario usuario = null;
+           Alumno alumno = null;
+           
+           System.out.println(servicio.getIdAlumno());
+           Optional<Alumno> opAlumno = alumnoRepository.findById(servicio.getIdAlumno());
+          
+           alumno = opAlumno.get();
+           
+           Optional<Usuario> opUsuario = usuarioRepository.findById(alumno.getIdUsuario());
+           
+           usuario = opUsuario.get();
+           System.out.println(usuario.getEmail());
+				
+           alumno.setEmail(usuario.getEmail());
+           alumno.setSemestre(usuario.getEmail());
+           Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+           exportCSV.add(mapper.map(alumno, ExportCSVDTO.class));
+           
+           
+           
+       	}
+       	
+        return exportCSV;
 
+	}
 }
