@@ -237,9 +237,10 @@ public class AlumnoServiceImpl implements AlumnoService {
            
            usuario = opUsuario.get();
            System.out.println(usuario.getEmail());
+           System.out.println(servicio.getSemestre());
 				
            alumno.setEmail(usuario.getEmail());
-           alumno.setSemestre(usuario.getEmail());
+           alumno.setSemestre(servicio.getSemestre());
            Mapper mapper = DozerBeanMapperBuilder.buildDefault();
            exportCSV.add(mapper.map(alumno, ExportCSVDTO.class));
            
