@@ -23,7 +23,7 @@ class ObtenerAlumnoPorIdAlumno extends Component{
 render() {     
        return (
         <React.Fragment>
-                            <td className="table_lista">{this.state.alumno.apellidoPaterno} {this.state.alumno.apellidoMaterno} {this.state.alumno.nombre}</td>
+                            <td className="table_lista"><a  href ={'/#/admin/DirectorioArchivosAlumno/' + this.props.idAlumno} >{this.state.alumno.apellidoPaterno} {this.state.alumno.apellidoMaterno} {this.state.alumno.nombre}</a></td>
                             <td className="table_lista">{this.state.alumno.boleta}</td>
                             <td className="table_lista">{this.state.alumno.programaAcademico}</td>
         </React.Fragment>

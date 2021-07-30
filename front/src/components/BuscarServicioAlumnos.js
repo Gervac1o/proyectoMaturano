@@ -98,17 +98,9 @@ render() {
        return (
         <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>PRE REGISTRO</strong></h1>
+            <h1  className="text-center"><strong>PRE REGISTRO</strong></h1>
             <br></br>
-            <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
-                <option value="TODOS">TODOS</option>
-                <option value="NUEVO">NO REVISADO</option>
-                <option value="PROCESANDO">EN PROCESO</option>
-                <option value="FINALIZADO">FINALIZADO</option>
-                <option value="RECHAZADO">RECHAZADO</option>
-                </select>
-            <br/><br/>
-            <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
+            <a download href={ "/alumno/export/NUEVO" }  id="btn_downLoad">Export to CSV</a>
             <br/><br/>
             <table>
                 <tbody>
@@ -135,7 +127,7 @@ render() {
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_new">NO REVISADO</a></td>
                                                 <td className="table_lista">NO REVISADO</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
+                                               
                                             </tr>
                                         </tbody>
                                         )
@@ -155,7 +147,7 @@ render() {
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_processing">EN PROCESO</a></td>
                                                 <td className="table_lista">{servicio.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
+                                               
                                             </tr>
                                         </tbody>
                                         )
@@ -175,7 +167,7 @@ render() {
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_finished">FINALIZADO</a></td>
                                                 <td className="table_lista">{servicio.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
+                                               
                                             </tr>
                                         </tbody>
                                         )
@@ -195,7 +187,7 @@ render() {
                                                 <td className="table_lista">{servicio.semestre}</td>
                                                 <td className="table_lista"><a id="state_rejected">RECHAZADO</a></td>
                                                 <td className="table_lista">{servicio.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
+                                               
                                             </tr>
                                         </tbody>
                                         )
@@ -251,7 +243,7 @@ render() {
                                                             break;
                                                         }
                                                     })()}
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
+                                               
                                             </tr>
                                         </tbody>
                                         )

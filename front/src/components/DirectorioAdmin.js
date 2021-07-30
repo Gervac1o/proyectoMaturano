@@ -44,11 +44,6 @@ class DirectorioAdmin extends Component{
             title= {this.state.email}
             size="slider-small"
             title2="DEyAE"/> 
-
-           
-
-
-
                     <tbody >
                      <tr >
                      <th className="table"><div>
@@ -70,8 +65,8 @@ class DirectorioAdmin extends Component{
                                 <ul>
                                    
                                     <li><Link to={'/admin/BuscarDictamen'} className="active">DICTAMEN DE 70%</Link></li>
-                                    <li><Link to={'/admin/BuscarLiberacion'} className="active">LIBERACIÓN EXTEMPORANEA</Link></li>
-                                    <li><Link to={'/admin/BuscarBaja'} className="active">BAJA DE SERVICIO SOCIAL</Link></li>
+                                   {/*} <li><Link to={'/admin/BuscarLiberacion'} className="active">LIBERACIÓN EXTEMPORANEA</Link></li>
+                                    <li><Link to={'/admin/BuscarBaja'} className="active">BAJA DE SERVICIO SOCIAL</Link></li>*/}
                                     <li><Link to={'/admin/BuscarServicio'} className="active">PRE REGISTRO</Link></li>
                                 </ul>
                             </li>
@@ -84,7 +79,7 @@ class DirectorioAdmin extends Component{
                                     <li>
                                         <Link to='#' className="active">Buscar Alumno ▼</Link>
                                         <ul>
-                                            <li><Link to={'/admin/BuscarNombre'} className="active">BUSCAR POR NOMBRE</Link></li>
+                                         {/*   <li><Link to={'/admin/BuscarNombre'} className="active">BUSCAR POR NOMBRE</Link></li>*/}
                                             <li><Link to={'/admin/BuscarBoleta'} className="active">BUSCAR POR BOLETA</Link></li>
                                             <li><Link to={'/admin/BuscarICA'} className="active">INGENIERÍA EN CONTROL Y AUTOMATIZACIÓN</Link></li>
                                             <li><Link to={'/admin/BuscarICE'} className="active">INGENIERÍA EN COMUNICACIONES Y ELECTRÓNICA</Link></li>
