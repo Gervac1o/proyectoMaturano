@@ -11,11 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
+
+import com.bew.demo.dao.ServicioSocialRepository;
 import com.bew.demo.dto.AlumnoDTO;
+import com.bew.demo.dto.ExportCSVDTO;
 import com.bew.demo.exception.EmptyResultException;
 import com.bew.demo.service.AlumnoService;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/alumno")
@@ -24,6 +36,9 @@ public class AlumnoRestController {
 	
 	@Autowired
 	private AlumnoService alumnoService;
+	
+	@Autowired
+	ServicioSocialRepository servicioRepository;
 
 	@GetMapping(path = "/findAll", produces = "application/json")
 	public ResponseEntity<?> buscar(){
@@ -93,4 +108,31 @@ public class AlumnoRestController {
 	alumnoService.deleteAlumno(idAlumno);
 	return ResponseEntity.ok().build();
 	}
+	
+	@GetMapping(path = "/export/{estado}")
+    public void exportToCSV(HttpServletResponse response,@PathVariable("estado") String estado) throws IOException, EmptyResultException{
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+         
+		List<ExportCSVDTO> export = alumnoService.exportCSV(estado);
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = {"Alumno ID", "apellido Paterno", "Apellido Materno", "Nombre", "Boleta", "Programa Academico", "Semestre", "E-Mail"};
+        //String[] nameMapping = {"idServicio", "apellidoPaterno", "apellidoMaterno", "boleta", "nombre", "programaAcademico"};
+
+        String[] nameMapping = {"idAlumno", "apellidoPaterno", "apellidoMaterno", "nombre", "boleta", "programaAcademico","semestre", "eMail"};
+        
+        csvWriter.writeHeader(csvHeader);
+         
+        for (ExportCSVDTO exportCSVDTO : export) {
+            csvWriter.write(exportCSVDTO, nameMapping);
+        }
+         
+        csvWriter.close();
+         
+    }
 }

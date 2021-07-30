@@ -14,6 +14,8 @@ public class AlumnoDTO implements Serializable{
 	private String boleta;
 	private String programaAcademico;
 	private String sexo;
+	private String semestre; 
+	private String email;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -84,5 +86,24 @@ public class AlumnoDTO implements Serializable{
 	}
 
 	private Long idUsuario;
+
+	public String getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(String semestre) {
+		this.semestre = semestre;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	
 
 }

@@ -14,6 +14,56 @@ public class ServicioSocialDTO implements Serializable {
 	private String fechaRegistro;
 	private String revisado;
 	private Long idAlumno;
+	private String lugar;
+	private String nombrePrograma;
+	private String fechaInicio;
+	private String fechaFin;
+	private String documentos;
+	private String cartaCompromiso;
+	private String estadoFechas;
+	
+	public String getEstadoFechas() {
+		return estadoFechas;
+	}
+	public void setEstadoFechas(String estadoFechas) {
+		this.estadoFechas = estadoFechas;
+	}
+	public String getLugar() {
+		return lugar;
+	}
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+	public String getNombrePrograma() {
+		return nombrePrograma;
+	}
+	public void setNombrePrograma(String nombrePrograma) {
+		this.nombrePrograma = nombrePrograma;
+	}
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+	public String getFechaFin() {
+		return fechaFin;
+	}
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+	public String getDocumentos() {
+		return documentos;
+	}
+	public void setDocumentos(String documentos) {
+		this.documentos = documentos;
+	}
+	public String getCartaCompromiso() {
+		return cartaCompromiso;
+	}
+	public void setCartaCompromiso(String cartaCompromiso) {
+		this.cartaCompromiso = cartaCompromiso;
+	}
 	public Long getIdServicio() {
 		return idServicio;
 	}
