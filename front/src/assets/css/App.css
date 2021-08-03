@@ -353,7 +353,8 @@ div {
   margin-top: 5px;
   min-height: 120px;
   height: auto;
-  max-width: 30%;
+ 
+  max-width: 370px;
   color: #135081;
 }
 
@@ -466,13 +467,12 @@ div {
 }
 #sidebar.servicioRight{
   float:right;
-  
   margin-top:  5px;
   margin-right: 2px;
   margin-left: 755px;
   min-height: 220px;
   height: auto;
-  width: 580px;
+  width: 610px;
 }
 #sidebar.servicioCenter{
   position:absolute;
@@ -480,7 +480,7 @@ div {
   margin-top: 5px;
   min-height: 120px;
   height: auto;
-  max-width: 400px;
+  max-width: 370px;
 }
 .warning{
   display: block;
@@ -787,17 +787,15 @@ input[type="radio"]{
 .table_lista{
   padding-top: 1px;
   border-width: 1px;
-  font-size: 15px;
+  font-size: 14px;
   background-color: #ffffff;
   color: #135081;
   text-align: center;
-  width: 150px; bottom: 1px solid #000000;
-  padding: 6px;
+  width: 210px;
+  padding: 2px;
   border-radius: 1px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.308);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+
 }
 .table_watch{
   padding-top: 5px;

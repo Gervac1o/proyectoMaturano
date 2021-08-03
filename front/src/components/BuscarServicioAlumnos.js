@@ -56,9 +56,9 @@ class BuscarServicioAlumnos extends Component {
         return (
             <React.Fragment>
                 <DirectorioAdmin />
-                <h1 className="text-center"><strong>Registro para realizar el Servicio Social</strong></h1>
+                <h1 className="text-center"><strong >Registro para realizar el Servicio Social</strong></h1>
                 <br></br>
-                <a download href={"/alumno/export/NUEVO"} id="btn_downLoad">Export to CSV</a>
+                <a download href={"/alumno/export/NUEVO"} id="btn_downLoad">Exportar CSV para constancias de créditos</a>
                 <br /><br />
                 <table>
                     <tbody>
