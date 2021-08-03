@@ -257,16 +257,16 @@ class AdminServicioArchivos extends React.Component {
                                 <label htmlFor="btn-modal">X</label>
                                 <div className="contenido">
                                     <div>
-                                        <strong>Fecha de Registro:</strong> {this.state.servicio.fechaRegistro}
+                                        <strong>Constancia de creditos</strong>
                                     </div>
                                     <div>
-                                        <strong>Semestre:</strong> {this.state.servicio.semestre}
+                                        <a>Semestre:</a> {this.state.servicio.semestre}
                                     </div>
                                     <div>
-                                        <strong>Revisado por: </strong> {this.state.servicio.revisado}
+                                        <a>Revisado por: </a> {this.state.servicio.revisado}
                                     </div>
                                     <div>
-                                        <strong>Estado:</strong>
+                                        <a>Estado:</a>
                                         {(() => {
                                             switch (this.state.cambioEstado.estado) {
                                                 case "NUEVO":
@@ -287,12 +287,8 @@ class AdminServicioArchivos extends React.Component {
                                                     );
                                             }
                                         })()}
-                                    <br/>
-                                    <strong>Fecha de Inicio:</strong> {this.state.servicio.fechaInicio}
-                                    <br/>
-                                    <strong>Fecha de Término:</strong> {this.state.servicio.fechaFin}
                                     </div>
-                                        <br/>
+                                     
                                     <strong>Cambiar estado de la constancia de créditos</strong>
                                     <div className="center">
                                         <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
@@ -305,16 +301,24 @@ class AdminServicioArchivos extends React.Component {
                                         <button className="btn_join" onClick={this.cambiarEstado}>Actualizar</button>
                                         <br />
                                     </div>
-                                    <br/>
                                     <strong>Asignar fechas de inicio y final de Servicio Social.</strong>
                                     <div>
+                                    <a>Lugar:</a> {this.state.servicio.lugar}
+                                    <br/>
+                                    <a>Nombre del programa:</a> {this.state.servicio.nombrePrograma}
+                                    <br/>
+                                    <a>Responsable:</a> {this.state.servicio.responsableDirecto}
+                                    <br/>
+                                    <a>Fecha de Inicio:</a> {this.state.servicio.fechaInicio}
+                                    <br/>
+                                    <a>Fecha de Término:</a> {this.state.servicio.fechaFin}   <br/><br/>
                                         <a>Fecha de Inicio.</a>
                                         <input type="date" className="input_login" name="fechaInicio" ref={this.fechaInicioRef} onChange={this.setFechas} /><br/>
                                         <a>Fecha de Término.</a>
                                         <input type="date" className="input_login" name="fechaInicio" ref={this.fechaFinRef} onChange={this.setFechas} />
                                         <button className="btn_join" onClick={this.cambiarEstado}>Aceptar</button>
                                     </div>
-                                    <div className="center"> <br/>
+                                    <div className="center"> 
                                         <strong>Eliminar solicitud de constancia de Créditos</strong>
                                         <select name="eliminar" ref={this.eliminarRef} onChange={this.statusDelete}>
                                             <option value="false">NO</option>

@@ -131,8 +131,6 @@ class MisDatosAdmin extends Component{
                              break;
                             }
                             })()}
-                           
-                            <a download href={ "/alumno/export/NUEVO" }  id="btn_downLoad">Export to CSV</a>
                 </div>
             );
   

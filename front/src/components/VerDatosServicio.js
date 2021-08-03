@@ -165,7 +165,33 @@ class VerDatosServicio extends Component{
                                     <strong>Soy Egresado</strong>
                                 </div>
                                 <br/>
-                               
+                                {(() => { 
+                                  switch (this.state.servicio.estadoFechas){
+                                    case "NUEVO":
+                                        return (
+                                            <div>
+                                            <strong>Fechas de inicio y término del servicio social.</strong><br/>
+                                            <strong>Estado de Trámite: </strong>
+                                            <a id="state_new">NUEVO</a>
+                                            </div>
+                                        );
+                                    case "FINALIZADO":
+                                        return(
+                                            <div>
+                                            <strong>Fechas de inicio y término del servicio social.</strong><br/>
+                                            <strong>Estado de Trámite: </strong>
+                                            <a id="state_finished">TERMINADO</a><br/>
+                                            <strong>Fecha de Inicio:</strong> {this.state.servicio.fechaInicio}<br/>
+                                            <strong>Fecha de Término:</strong> {this.state.servicio.fechaFin}<br/>
+                                            <strong>Lugar:</strong> {this.state.servicio.lugar}<br/>
+                                            <strong>Nombre del programa:</strong> {this.state.servicio.nombrePrograma}<br/>
+                                            <strong>Responsable directo:</strong> {this.state.servicio.responsableDirecto}<br/><br/>
+                                            <strong>Documentos personales:</strong> {this.state.servicio.documentos}<br/>
+                                            <strong>Carta Compromiso:</strong> {this.state.servicio.cartaCompromiso}<br/>
+                                        </div>
+                                        );
+                            }
+                        })()}
                             </div>
                 </div>
                 );
