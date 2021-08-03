@@ -115,11 +115,12 @@ class DirectorioArchivosAlumno extends Component {
                 <td className="table_lista, table_title">TRÁMITE</td>
                     <tr><br/>
                         <tr>
-                            <td> <button class="btn" id= "btn-table" onClick={this.tramite1} > Dictamen de 70%</button></td>
+                        <td><button class="btn" id= "btn-table" onClick={this.tramite4} > PRE REGISTRO</button></td>
                         </tr>
                         <br/>
                         <tr>
-                            <td><button class="btn" id= "btn-table" onClick={this.tramite4} > PRE REGISTRO</button></td>
+                        <td> <button class="btn" id= "btn-table" onClick={this.tramite1} > Dictamen de 70%</button></td>
+                            
                         </tr>
                         <br/>
                     </tr>

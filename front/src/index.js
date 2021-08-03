@@ -71,7 +71,7 @@ ReactDOM.render(
 
                 {/**RUTAS USUARIO  */}
 
-                {/*RUTA PRINCIPAL, falta poner el "user", PARA QUE NO TRUENE en el back */}
+           
                 <Route exact path="/user/MisDatosAlumno" component={MisDatosAlumno}/>
 
                 <Route exact path="/user/CrearDictamen" component={Dictamen}/>
