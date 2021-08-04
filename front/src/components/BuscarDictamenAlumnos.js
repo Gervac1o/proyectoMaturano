@@ -99,7 +99,7 @@ render() {
        return (
         <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong></h1>
+            <h1  className="text-center" ><strong >DICTAMEN DE MENOS DE 70% DE CREDITOS</strong></h1>
             <br></br>
             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                 <option value="TODOS">TODOS</option>
@@ -277,7 +277,7 @@ render() {
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong></h1>
+            <h1  className="text-center"><strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong></h1>
             <br></br>
             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                 <option value="TODOS">TODOS</option>
@@ -289,14 +289,14 @@ render() {
             <br/><br/>
             <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
             <br/><br/>
-                <h1>No hay alumnos registrados para esta solicitud</h1>
+                <h3  className="text-center">No hay alumnos registrados para esta solicitud</h3>
             </React.Fragment>
         );
     }else{
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong></h1>
+            <h1  className="text-center"><strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong></h1>
             <br></br>
             <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
                 <option value="TODOS">TODOS</option>

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DirectorioAdmin from './DirectorioAdmin';
 import ObtenerAlumnoPorIdAlumno from './ObtenerAlumnoPorIdAlumno';
-class BuscarServicioAlumnos extends Component{
+class BuscarServicioAlumnos extends Component {
 
     estadoRef = React.createRef();
 
@@ -29,282 +29,153 @@ class BuscarServicioAlumnos extends Component{
             });
     }//Fin de getServicios
 
-    changeState = () =>{
+    changeState = () => {
         this.setState({
             estado: this.estadoRef.current.value
         });
     }
 
-    cambiarEstado = () =>{
-        if(this.state.estado === "NUEVO"){
+    cambiarEstado = () => {
+        if (this.state.estado === "NUEVO") {
             this.getNew();
-        }else if(this.state.estado === "PROCESANDO"){
+        } else if (this.state.estado === "PROCESANDO") {
             this.getProcessing();
-        }else if(this.state.estado === "FINALIZADO"){
+        } else if (this.state.estado === "FINALIZADO") {
             this.getFinished();
-        }else if(this.state.estado === "RECHAZADO"){
+        } else if (this.state.estado === "RECHAZADO") {
             this.getRejected();
-        }else if(this.state.estado === "TODOS"){
+        } else if (this.state.estado === "TODOS") {
             this.getServicios();
         }
     }
 
-    getNew = () => {
-        axios.get("servicioSocial/findEstado/NUEVO")
-            .then(response => {
-                this.setState({
-                    servicios: response.data,
-                    status: 'success',
-                    statusEstado: "NUEVO"
-                });
-            });
-    }//Fin de getNew
 
-    getProcessing = () => {
-        axios.get("servicioSocial/findEstado/PROCESANDO")
-            .then(response => {
-                this.setState({
-                    servicios: response.data,
-                    status: 'success',
-                    statusEstado: "PROCESANDO"
-                });
-            });
-    }//Fin de getProcessing
 
-    getFinished = () => {
-        axios.get("servicioSocial/findEstado/FINALIZADO")
-            .then(response => {
-                this.setState({
-                    servicios: response.data,
-                    status: 'success',
-                    statusEstado: "FINALIZADO"
-                });
-            });
-    }//Fin de getFinished
+    render() {
 
-    getRejected = () => {
-        axios.get("servicioSocial/findEstado/RECHAZADO")
-            .then(response => {
-                this.setState({
-                    servicios: response.data,
-                    status: 'success',
-                    statusEstado: "RECHAZADO"
-                });
-            });
-    }//Fin de getFinish
-    
-render() {
-    if(this.state.servicios.length >=1){        
-       return (
-        <React.Fragment>
-            <DirectorioAdmin />
-            <h1><strong>PRE REGISTRO</strong></h1>
-            <br></br>
-            <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
-                <option value="TODOS">TODOS</option>
-                <option value="NUEVO">NO REVISADO</option>
-                <option value="PROCESANDO">EN PROCESO</option>
-                <option value="FINALIZADO">FINALIZADO</option>
-                <option value="RECHAZADO">RECHAZADO</option>
-                </select>
-            <br/><br/>
-            <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
-            <br/><br/>
-            <table>
-                <tbody>
-                    <tr>
-                        <th className="table_lista, table_title">Nombre</th>
-                        <th className="table_lista, table_title">Boleta</th>
-                        <th className="table_lista, table_title">Programa Académico</th>
-                        <th className="table_lista, table_title">Semestre</th>
-                        <th className="table_lista, table_title">Estado de la Solicitud</th>
-                        <th className="table_lista, table_title">Revisado por</th>
-                    </tr>
-                </tbody>
-                        {(() => {  
-                                switch (this.state.statusEstado){
-                                case "NUEVO":
-                                    return (
-                                        <React.Fragment>
-                                        {this.state.servicios.map((servicio, i) =>
-                                            <tbody key={i}>
-                                            <tr>
-                                                <ObtenerAlumnoPorIdAlumno
-                                                idAlumno={servicio.idAlumno}
-                                                />
-                                                <td className="table_lista">{servicio.semestre}</td>
-                                                <td className="table_lista"><a id="state_new">NO REVISADO</a></td>
-                                                <td className="table_lista">NO REVISADO</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
-                                            </tr>
-                                        </tbody>
-                                        )
-                                        }
-                                        </React.Fragment>
-                                    );
-                                break;
-                                case "PROCESANDO":
-                                    return(
-                                        <React.Fragment>
-                                        {this.state.servicios.map((servicio, i) =>
-                                            <tbody key={i}>
-                                            <tr>
-                                                <ObtenerAlumnoPorIdAlumno
-                                                idAlumno={servicio.idAlumno}
-                                                />
-                                                <td className="table_lista">{servicio.semestre}</td>
-                                                <td className="table_lista"><a id="state_processing">EN PROCESO</a></td>
-                                                <td className="table_lista">{servicio.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
-                                            </tr>
-                                        </tbody>
-                                        )
-                                        }
-                                        </React.Fragment>
-                                    ); 
-                                    break;  
-                                case "FINALIZADO":
-                                    return(
-                                        <React.Fragment>
-                                        {this.state.servicios.map((servicio, i) =>
-                                            <tbody key={i}>
-                                            <tr>
-                                                <ObtenerAlumnoPorIdAlumno
-                                                idAlumno={servicio.idAlumno}
-                                                />
-                                                <td className="table_lista">{servicio.semestre}</td>
-                                                <td className="table_lista"><a id="state_finished">FINALIZADO</a></td>
-                                                <td className="table_lista">{servicio.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
-                                            </tr>
-                                        </tbody>
-                                        )
-                                        }
-                                        </React.Fragment>
-                                    );
-                                    break;
-                                case "RECHAZADO":
-                                    return(
-                                        <React.Fragment>
-                                        {this.state.servicios.map((servicio, i) =>
-                                            <tbody key={i}>
-                                            <tr>
-                                                <ObtenerAlumnoPorIdAlumno
-                                                idAlumno={servicio.idAlumno}
-                                                />
-                                                <td className="table_lista">{servicio.semestre}</td>
-                                                <td className="table_lista"><a id="state_rejected">RECHAZADO</a></td>
-                                                <td className="table_lista">{servicio.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
-                                            </tr>
-                                        </tbody>
-                                        )
-                                        }
-                                        </React.Fragment>
-                                    );
-                                break;
-                                case "TODOS":
-                                    return(
-                                        <React.Fragment>
-                                        {this.state.servicios.map((servicio, i) =>
-                                            <tbody key={i}>
-                                            <tr>
-                                                <ObtenerAlumnoPorIdAlumno
-                                                idAlumno={servicio.idAlumno}
-                                                />
-                                                <td className="table_lista">{servicio.semestre}</td>
-                                                <td className="table_lista">{(() => {  
-                                                        switch (servicio.estado){
-                                                        case "NUEVO":
-                                                            return (
-                                                                <a id="state_new">NO REVISADO</a>
-                                                            );
-                                                        break;
-                                                        case "PROCESANDO":
-                                                            return(
-                                                                <a id="state_processing">EN PROCESO</a>
-                                                            ); 
-                                                            break;  
-                                                        case "FINALIZADO":
-                                                            return(
-                                                                <a id="state_finished">FINALIZADO</a>   
-                                                            );
-                                                        case "RECHAZADO":
-                                                            return(
-                                                                <a id="state_rejected">RECHAZADO</a>
-                                                            )
-                                                        default: 
-                                                            break;
-                                                        }
-                                                        })()}</td>
-                                                    {(() => {  
-                                                        switch (servicio.estado){
-                                                        case "NUEVO":
-                                                            return(
-                                                                <th className="table_lista">NO REVISADO</th>
-                                                            ); 
-                                                            break;  
-                                                        default:
-                                                            return(
-                                                                <th className="table_lista">{servicio.revisado}</th>
-                                                            ); 
-                                                            break;
-                                                        }
-                                                    })()}
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + servicio.idAlumno} id="btn_watch">Ver Archivos</Link></td>
-                                            </tr>
-                                        </tbody>
-                                        )
-                                        }
-                                        </React.Fragment>
-                                    );
-                                break;
-                                default: 
-                                    break;
-                                }
-                                })()}
-            </table>
-        </React.Fragment>
-    );
-    }else if(this.state.servicios.length === 0 && this.state.status === 'success'){
-        return(
+        return (
             <React.Fragment>
-            <DirectorioAdmin />
-            <h1><strong>PRE REGISTRO</strong></h1>
-            <br></br>
-            <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
-                <option value="TODOS">TODOS</option>
-                <option value="NUEVO">NO REVISADO</option>
-                <option value="PROCESANDO">EN PROCESO</option>
-                <option value="FINALIZADO">FINALIZADO</option>
-                <option value="RECHAZADO">RECHAZADO</option>
-                </select>
-            <br/><br/>
-            <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
-            <br/><br/>
-                <h1>No hay alumnos registrados para esta solicitud</h1>
+                <DirectorioAdmin />
+                <h1 className="text-center"><strong >Registro para realizar el Servicio Social</strong></h1>
+                <br></br>
+                <a download href={"/alumno/export/NUEVO"} id="btn_downLoad">Exportar CSV para constancias de créditos</a>
+                <br /><br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <th className="table_lista, table_title">Nombre</th>
+                            <th className="table_lista, table_title">Boleta</th>
+                            <th className="table_lista, table_title">Programa Académico</th>
+                            <th className="table_lista, table_title">Semestre</th>
+                            <th className="table_lista, table_title">1</th>
+                            <th className="table_lista, table_title">2</th>
+                            <th className="table_lista, table_title">3</th>
+                            <th className="table_lista, table_title">4</th>
+                            <th className="table_lista, table_title">Revisado por</th>
+                        </tr>
+                    </tbody>
+                    <React.Fragment>
+                        {this.state.servicios.map((servicio, i) =>
+                            <tbody key={i}>
+                                <tr>
+                                    <ObtenerAlumnoPorIdAlumno
+                                        idAlumno={servicio.idAlumno}
+                                    />
+                                    <td className="table_lista">{servicio.semestre}</td>
+                                    <td className="table_lista" style={{ maxWidth: '60px' }}>
+                                        {(() => {
+                                            switch (servicio.estado) {
+                                                case "NUEVO":
+                                                    return (
+                                                        <a id="state_new">----</a>
+                                                    );
+                                                    break;
+                                                case "PROCESANDO":
+                                                    return (
+                                                        <a id="state_processing">----</a>
+                                                    );
+                                                    break;
+                                                case "FINALIZADO":
+                                                    return (
+                                                        <a id="state_finished">OK</a>
+                                                    );
+                                                case "RECHAZADO":
+                                                    return (
+                                                        <a id="state_rejected">XX</a>
+                                                    )
+
+                                            }
+                                        })()}</td>
+                                    <td className="table_lista" style={{ maxWidth: '60px' }}>
+                                        {(() => {
+                                            switch (servicio.estadoFechas) {
+                                                case "NUEVO":
+                                                    return (
+                                                        <a id="state_new">----</a>
+                                                    );
+                                                case "FINALIZADO":
+                                                    return (
+                                                        <a id="state_finished">OK</a>
+                                                    )
+
+                                            }
+                                        })()}
+                                    </td>
+                                    <td className="table_lista" style={{ maxWidth: '60px' }}>
+                                        {(() => {
+                                            switch (servicio.documentos) {
+                                                case "ok":
+                                                    return (
+                                                        <a id="state_finished">OK</a>
+                                                    );
+                                                case "flase":
+                                                    return (
+                                                        <a id="state_rejected">XX</a>
+                                                    )
+                                            }
+                                        })()}
+                                    </td>
+                                    <td className="table_lista" style={{ maxWidth: '60px' }}>
+                                        {(() => {
+                                            switch (servicio.cartaCompromiso) {
+                                                case "ok":
+                                                    return (
+                                                        <a id="state_finished">OK</a>
+                                                    );
+                                                case "flase":
+                                                    return (
+                                                        <a id="state_rejected">XX</a>
+                                                    )
+                                            }
+                                        })()}
+                                    </td>
+                                    {(() => {
+                                        switch (servicio.estado) {
+                                            case "NUEVO":
+                                                return (
+                                                    <th className="table_lista">NO REVISADO</th>
+                                                );
+                                                break;
+                                            default:
+                                                return (
+                                                    <th className="table_lista">{servicio.revisado}</th>
+                                                );
+                                                break;
+                                        }
+                                    })()}
+
+                                </tr>
+                            </tbody>
+                        )
+                        }
+                    </React.Fragment>
+
+
+
+                </table>
             </React.Fragment>
         );
-    }else{
-        return(
-            <React.Fragment>
-            <DirectorioAdmin />
-            <h1><strong>PRE REGISTRO</strong></h1>
-            <br></br>
-            <select name="estado" ref={this.estadoRef} onChange={this.changeState}>
-                <option value="TODOS">TODOS</option>
-                <option value="NUEVO">NO REVISADO</option>
-                <option value="PROCESANDO">EN PROCESO</option>
-                <option value="FINALIZADO">FINALIZADO</option>
-                <option value="RECHAZADO">RECHAZADO</option>
-                </select>
-            <br/><br/>
-            <button className="btn_join" onClick={this.cambiarEstado}>Buscar</button>
-            <br/><br/>
-                <h1>Cargando... Espere un momento...</h1>
-            </React.Fragment>
-        );
-    }
+
     }//Fin de Render
 }//Fin de Class BuscarServicioAlumnos
 export default BuscarServicioAlumnos;

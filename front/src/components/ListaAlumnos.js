@@ -29,7 +29,7 @@ render() {
        return (
         <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>Alumnos Registrados en el Sistema</strong></h1>
+            <h1  className="text-center"><strong>Alumnos Registrados en el Sistema</strong></h1>
             <table>
                 <tbody className="centrar">
                     <tr>
@@ -58,15 +58,15 @@ render() {
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>No hay Alumnos Registrados</strong></h1>
+            <h1  className="text-center"><strong>No hay Alumnos Registrados</strong></h1>
             </React.Fragment>
         );
     }else{
         return(
             <React.Fragment>
             <DirectorioAdmin />
-            <h1><strong>Alumnos Registrados en el Sistema</strong></h1>
-                <h1>Cargando... espere un momento</h1>
+            <h1  className="text-center"><strong>Alumnos Registrados en el Sistema</strong></h1>
+                <h3  className="text-center">Cargando... espere un momento</h3>
             </React.Fragment>
         );
     }

@@ -106,22 +106,22 @@ render() {
                                                     <td className="table_lista">{lista1.comentario}</td>
                                                     <td><Link to={'/doc/PdfDictamen/' + lista1.idDoc}target="_blank" id="btn_watch">Visualizar</Link></td>
                                                     <td><a download href={ "/docDictamen/getDoc/" + lista1.idDoc}  id="btn_downLoad">Descargar</a></td>
-                                                    <td><BorrarDoc
+                                                  {/*  <td><BorrarDoc
                                                     idLista={lista1.idLista}
                                                     idDoc={lista1.idDoc}
                                                     url= "docServicio/deleteDoc/"
                                                     redirect= "CrearServicio"
-                                                    /></td>
+                                                  /></td> */}
                                                 </tr>
                                         </tbody>
                                         )}
                                         </table>
                                         <br/>
                                         <br/>
-                                    <div  >
+                                  {/*  <div  >
                                  <label for="file" id = "input-size"  >{this.state.file.name}</label>
                                     <input type="file" name = "file" id = "file"  onChange={this.fileChange} />
-                                    </div>
+                                  </div>*/}
                                         {(() => {
                                         switch(this.state.statusArchivo){   
                                             case false:
@@ -135,7 +135,7 @@ render() {
                                         })()}
                                     </div>
                                     <br/>
-                                    <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>
+                                   {/* <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>*/}
                             </div>                
                 </div>
             );
@@ -147,10 +147,10 @@ render() {
                                     <strong>Aun no hay archivos guardados</strong>
                                     <br/>
                                     <br/>
-                                    <div  >
+                                 {/*   <div  >
                                  <label for="file" id = "input-size"  >{this.state.file.name}</label>
                                     <input type="file" name = "file" id = "file"  onChange={this.fileChange} />
-                                    </div>
+                                 </div>*/}
                                     {(() => {
                                         switch(this.state.statusArchivo){   
                                             case false:
@@ -164,7 +164,7 @@ render() {
                                         })()}
                                 </div>
                                 <br/>
-                                <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>
+                               {/* <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button>*/}
                             </div>                
                 </div>
             );
@@ -178,8 +178,8 @@ render() {
                                     <br/>
                                     <br/>
                                    
-                                 <label for="file" id = "input-size"  >{this.state.file.name}</label>
-                                    <input type="file" name = "file" id = "file"  onChange={this.fileChange} />
+                                 {/*<label for="file" id = "input-size"  >{this.state.file.name}</label>
+                                    <input type="file" name = "file" id = "file"  onChange={this.fileChange} />*/}
                                     </div>
                                 {(() => {
                                 switch(this.state.statusArchivo){   
@@ -194,7 +194,7 @@ render() {
                                 })()}
                             </div>
                             <br/>
-                            <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button> 
+                          {/*  <button className="btn"  onClick = {this.upLoad}>Subir Archivo</button> */}
                         </div>
             </div>
         );

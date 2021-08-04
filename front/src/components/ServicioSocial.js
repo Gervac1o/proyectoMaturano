@@ -6,6 +6,8 @@ import Footer from './Footer';
 import Cookies from 'universal-cookie';
 import SubirServicio from './SubirServicio';
 import VerDatosServicio from './VerDatosServicio';
+import Fechas from './Fechas';
+
 
 const cookies = new Cookies();
 
@@ -18,15 +20,19 @@ class ServicioSocial extends React.Component {
     servicioRef = cookies.get('idAlumno');
     fechaRegistroRef = React.createRef();
     fechaRegistroRef = new Date().toLocaleDateString();
+    lugarRef = React.createRef();
+    responsableDirectoRef = React.createRef();
+    nombreProgramaRef = React.createRef();
 
 
     state = {
         idAlumno: cookies.get('idAlumno'),
         statusResponsable: null,
         servicio: {
-            semestre:"SEPTIMO", 
+            semestre:null, 
+            estado:null,
+            responsableDirecto:"null",
         },
-
         status:"false",
         estado: null
 
@@ -34,51 +40,54 @@ class ServicioSocial extends React.Component {
 
     componentWillMount = () =>{
         this.searchServicio();
+       
     }
 
     searchServicio = () => {
-        axios.get("servicioSocial/findIdAlumno/"+ this.servicioRef)
-        .then(res =>{
-            this.setState({
-                servicio: res.data,
-                //estado: res.data.idServicio,
-            });
-        })
-        .then(res =>{
-            this.setState({
-                estado: this.state.servicio.estado,
-                servicio: {
-                    semestre: null,
-                    responsableDirecto: null,
-                    estado: "NUEVO",
-                    fechaRegistro: null,
-                    revisado: null,
-                    idAlumno: null,
-                    idServicio: null
-                }
-            });
-        })
+       
+            axios.get("servicioSocial/findIdAlumno/"+ this.servicioRef)
+            .then(res =>{
+                this.setState({
+                    servicio: res.data,
+                    estado: res.data.estado
+                });
+            })
+        
+
+       
+
        
        
     }//Fin de search Servicio
 
     changeState = () => {
+
         this.setState({
             servicio: {
                 semestre: this.semestreRef.current.value,
-                responsableDirecto: "",
+                responsableDirecto: "null",
                 estado: "NUEVO",
                 fechaRegistro: this.fechaRegistroRef,
                 revisado: "null",
                 idAlumno: this.state.idAlumno,
-                idServicio: this.state.idAlumno
+                idServicio: this.state.idAlumno,
+                cartaCompromiso:"false",
+                documentos:"false",
+                fechaFin: "false",
+                fechaInicio:"false",
+                lugar: "false",
+                nombrePrograma:"false",
             }
         });
-
     }
 
     saveServicio = (e) => {
-       // this.changeState();
+        //this.changeState();
+
+       console.log( this.state.servicio.semestre)
+
+       if(this.state.servicio.semestre !== undefined){
+
             axios.post( "servicioSocial/save", this.state.servicio)
             .then(res => {
                 this.setState(
@@ -87,54 +96,106 @@ class ServicioSocial extends React.Component {
                     }
                 );
             });
-
+     }
+        
     }//Fin de funcion saveServicio()
+
     render() {
         if(this.state.status === 'true'){
             window.location.reload(false);
         }
-
+        if(this.state.servicio.estado !== "FINALIZADO" ){
         return (
             <div className="center">
             <HeaderDEyAE/>
                 <DirectorioAlumno />
+                <SubirServicio
+                borrar = {this.state.servicio.estadoFechas}
+                         />
+
                         <div id="sidebar" className="servicioLeft">
-                            <div>
-                                <label htmlFor="semestre" className="text_login">Semestre</label>
-                                <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
-                                <option label="" ></option>
-                                    <option value="SEPTIMO">SEPTIMO</option>
-                                    <option value="OCTAVO">OCTAVO</option>
-                                    <option value="NOVENO">NOVENO</option>
-                                    <option value="EGRESADO">EGRESADO</option>
-                                    </select>
-                            </div>
-                            <br/>
+                            <br/><strong>Constancia de créditos</strong>
                             {(() => {
                                 switch(this.state.estado){
                                     case "NUEVO":
                                     return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                       
+                                    <div>
+                                        <label htmlFor="semestre" className="text_login">Semestre</label>
+                                        <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
+                                        <option label="" ></option>
+                                            <option value="SEPTIMO">SEPTIMO</option>
+                                            <option value="OCTAVO">OCTAVO</option>
+                                            <option value="NOVENO">NOVENO</option>
+                                            <option value="EGRESADO">EGRESADO</option>
+                                            </select>
+                                            <br/><br/>
+                                            <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                            <br/><br/>
+                                           
+                                    </div>
                                     );
                                     case undefined:
                                     return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                        <div>
+                                        <label htmlFor="semestre" className="text_login">Semestre</label>
+                                        <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
+                                        <option label="" ></option>
+                                            <option value="SEPTIMO">SEPTIMO</option>
+                                            <option value="OCTAVO">OCTAVO</option>
+                                            <option value="NOVENO">NOVENO</option>
+                                            <option value="EGRESADO">EGRESADO</option>
+                                            </select><br/><br/>
+                                            <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                            <br/><br/>
+                                            
+                                    </div>
                                     );
                                     case null:
                                     return (
-                                        <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                        <div>
+                                        <label htmlFor="semestre" className="text_login">Semestre</label>
+                                        <select name="semestre" className="input_login" ref={this.semestreRef} onChange={this.changeState}>
+                                        <option label="" ></option>
+                                            <option value="SEPTIMO">SEPTIMO</option>
+                                            <option value="OCTAVO">OCTAVO</option>
+                                            <option value="NOVENO">NOVENO</option>
+                                            <option value="EGRESADO">EGRESADO</option>
+                                            </select>
+                                            <br/><br/>
+                                            <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>
+                                            <br/><br/>
+                                            
+                                    </div>
                                     );
                                     default:
                                         break;
                                 }
                             })()}
-                           {/* <button className="btn" onClick = {this.saveServicio}>Solicitar Constancia de Creditos</button>*/}
                           </div>
-                          <SubirServicio/>
+                        
                           <VerDatosServicio/>
+                          
                           <Footer/>
             </div>
         );
     }
+    else{
+        return (
+            <div className="center">
+            <HeaderDEyAE/>
+                <DirectorioAlumno />
+                <SubirServicio
+                borrar = {this.state.servicio.estadoFechas}/>
+                   <Fechas/>
+                          <VerDatosServicio/>
+                          <Footer/>
+            </div>
+        );
+                              
+    }
+      
+    
+}
 }
 export default ServicioSocial;

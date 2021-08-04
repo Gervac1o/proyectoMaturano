@@ -14,7 +14,7 @@ class DirectorioArchivosAlumno extends Component {
 
     state = {
         idAlumno: "",
-        idTramite: "",
+        idTramite: 4,
         status: null,
         alumno:{}
     };
@@ -113,26 +113,19 @@ class DirectorioArchivosAlumno extends Component {
 
                 <tbody>
                 <td className="table_lista, table_title">TRÁMITE</td>
-                    <tr>
+                    <tr><br/>
                         <tr>
-                            <td> <button class="btn" id= "btn-table" onClick={this.tramite1} > Dictamen de 70%</button></td>
+                        <td><button class="btn" id= "btn-table" onClick={this.tramite4} > PRE REGISTRO</button></td>
                         </tr>
                         <br/>
                         <tr>
-                            <td><button class="btn" id= "btn-table"  onClick={this.tramite2} > Liberación Extemporanea</button></td>
-                        </tr>
-                        <br/>
-                        <tr>
-                            <td><button class="btn" id= "btn-table" onClick={this.tramite3} > Baja de Servicio Social</button></td>
-                        </tr>
-                        <br/>
-                        <tr>
-                            <td><button class="btn" id= "btn-table" onClick={this.tramite4} > PRE REGISTRO</button></td>
+                        <td> <button class="btn" id= "btn-table" onClick={this.tramite1} > Dictamen de 70%</button></td>
+                            
                         </tr>
                         <br/>
                     </tr>
                     <td className="table_lista, table_title">OTROS</td>
-                    <tr>
+                    <tr><br/>
                         <tr>
                             <td><button class="btn" id= "btn-table" onClick={this.tramite5} > Restablecer contraseña de alumno</button></td>
                         </tr>

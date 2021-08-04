@@ -49,7 +49,7 @@ class MisDatosAlumno extends Component {
             .catch(err => {
                 
             })
-    }//Fin de funcion getAlumno()
+    }
 
 
     updateDatos = () => {

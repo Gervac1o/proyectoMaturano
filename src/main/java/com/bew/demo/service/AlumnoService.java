@@ -6,6 +6,7 @@ package com.bew.demo.service;
 import java.util.List;
 
 import com.bew.demo.dto.AlumnoDTO;
+import com.bew.demo.dto.ExportCSVDTO;
 import com.bew.demo.exception.EmptyResultException;
 import com.bew.demo.exception.MailRepetidoException;
 
@@ -36,6 +37,8 @@ public interface AlumnoService {
     AlumnoDTO AlumnoApellidoPaterno(String apellidoPaterno);
 
     AlumnoDTO AlumnoApellidoMaterno(String apellidoMaterno);
+    
+    List<ExportCSVDTO> exportCSV(String estado) throws EmptyResultException;
     
     
 

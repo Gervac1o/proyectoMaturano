@@ -22,7 +22,9 @@ class Dictamen extends React.Component {
     state = {
         idAlumno: cookies.get('idAlumno'),
         statusCreditos: "false",
-        dictamen: {},
+        dictamen: {
+            estado: "NUEVO",
+        },
         status: "null",
         estado: null
     };
@@ -35,29 +37,18 @@ class Dictamen extends React.Component {
         axios.get("user/dictamen/findIdAlumno/" + this.dictamenRef)
         .then(res =>{
             this.setState({
-                dictamen: res.data
+                dictamen: res.data,
+                statusCreditos:"true"
             });
-        })
-        .then(res => {
-            this.setState({
-                estado: this.state.dictamen.estado,
-                dictamen:{
-                    porcentajeCreditos: null,
-                    semestre: "SEPTIMO",
-                    estado: "NUEVO",
-                    fechaRegistro: null,
-                    revisado: null,
-                    idAlumno: null,
-                    idDictamen: null
-                }
-            });
+        
+        
         });
     }//Fin de search Dictamen
     changeState = () => {
         this.setState({
             dictamen: {
                 porcentajeCreditos: this.creditosRef.current.value,
-                semestre: "SEPTIMO",
+                semestre: "SEXTO",
                 estado: "NUEVO",
                 fechaRegistro: this.fechaRegistroRef,
                 revisado: null,
@@ -75,7 +66,7 @@ class Dictamen extends React.Component {
             .then(res => {
                 this.setState(
                     {
-                        statusCreditos: "true"
+                        estado: true
                     }
                 );
                
@@ -91,9 +82,8 @@ class Dictamen extends React.Component {
     render() {
        
             
-        if (this.state.statusCreditos === "true") {
+        if (this.state.estado === true) {
             window.location.reload();
-       
         }
         return (
             <div className="center">
@@ -101,29 +91,43 @@ class Dictamen extends React.Component {
                 <DirectorioAlumno />
                         <div id="sidebar" className="servicioLeft">
                             <div>
-                                <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
-                                <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>
-                                     
+                            <strong>DICTAMEN DE MENOS DE 70% DE CREDITOS</strong>
                             </div>
-                            <br></br>
                             {(() => {
-                                switch(this.state.estado){
-                                    case "NUEVO":
-                                    return (
-                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-                                    );
-                                    case undefined:
-                                    return (
-                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-                                    );
+                                switch(this.state.dictamen.estado){
                                     case null:
-                                    return (
-                                        <button className="btn" onClick = {this.saveDictamen}>Aceptar</button>
-                                    );
-                                    default:
-                                        break;
+                                        return(
+                                            <div>
+                                            <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
+                                            <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
+                                            <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
+                                            <button className="btn" onClick = {this.saveDictamen}>Solicitar dictamen</button>
+                                           </div>
+                                        )
+                                    case "NUEVO":
+                                        return(
+                                            <div>
+                                            <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
+                                            <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
+                                            <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
+                                            <button className="btn" onClick = {this.saveDictamen}>Solicitar dictamen</button>
+                                           </div>
+                                        );
+
+                                    case undefined:
+                                        return(
+                                            <div>
+                                            <label htmlFor="creditos" className="text_login">Porcentaje de Creditos</label>
+                                            <input type="text" className="input_login" name="creditos" placeholder="Ingresa el % de creditos sin decimales" ref={this.creditosRef} onChange={this.changeState}/>   
+                                            <a className="warning">Debes contar almenos con 68% de creditos y menos de 70%</a>
+                                            <button className="btn" onClick = {this.saveDictamen}>Solicitar dictamen</button>
+                                           </div>
+                                        );
+
                                 }
                             })()} 
+                            <br></br>
+
                           </div>
                           <SubirDictamen/>
                           <VerDatosDictamen/>
