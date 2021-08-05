@@ -66,7 +66,6 @@ class BuscarServicioAlumnos extends Component {
                             <th className="table_lista, table_title">Nombre</th>
                             <th className="table_lista, table_title">Boleta</th>
                             <th className="table_lista, table_title">Programa Académico</th>
-                            <th className="table_lista, table_title">Semestre</th>
                             <th className="table_lista, table_title">1</th>
                             <th className="table_lista, table_title">2</th>
                             <th className="table_lista, table_title">3</th>
@@ -81,7 +80,6 @@ class BuscarServicioAlumnos extends Component {
                                     <ObtenerAlumnoPorIdAlumno
                                         idAlumno={servicio.idAlumno}
                                     />
-                                    <td className="table_lista">{servicio.semestre}</td>
                                     <td className="table_lista" style={{ maxWidth: '60px' }}>
                                         {(() => {
                                             switch (servicio.estado) {

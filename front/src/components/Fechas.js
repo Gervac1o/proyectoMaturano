@@ -18,6 +18,7 @@ class Fechas extends React.Component {
     lugarRef = React.createRef();
     responsableDirectoRef = React.createRef();
     nombreProgramaRef = React.createRef();
+    revisadoRef =  React.createRef();
 
 
     state = {
@@ -26,7 +27,6 @@ class Fechas extends React.Component {
         servicio: {
             estado:null,
         },
-
         status:"false",
         estado: null
 
@@ -43,6 +43,7 @@ class Fechas extends React.Component {
                 servicio: res.data,
                 estado: res.data.responsableDirecto,
             });
+            this.revisadoRef = this.state.servicio.revisado
         })
     }//Fin de search Servicio
 
@@ -57,7 +58,7 @@ class Fechas extends React.Component {
                 estado:"FINALIZADO",
                 fechaRegistro: this.fechaRegistroRef,
                 fechaInicio: "null",
-                revisado: "null",
+                revisado: this.revisadoRef,
             }
         });
     }
