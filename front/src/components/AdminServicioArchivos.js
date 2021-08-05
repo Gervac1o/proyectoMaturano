@@ -260,7 +260,7 @@ class AdminServicioArchivos extends React.Component {
                                         <strong>Constancia de creditos</strong>
                                     </div>
                                     <div>
-                                        <a>Semestre:</a> {this.state.servicio.semestre}
+                                        <a>Fecha de registro:</a> {this.state.servicio.fechaRegistro}
                                     </div>
                                     <div>
                                         <a>Revisado por: </a> {this.state.servicio.revisado}

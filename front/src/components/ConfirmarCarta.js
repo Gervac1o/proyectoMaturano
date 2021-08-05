@@ -28,7 +28,7 @@ class confirmarCarta extends React.Component {
                         nombrePrograma: res.data.nombrePrograma,
                         estadoFechas:res.data.estadoFechas,
                         estado: res.data.estado,
-                        fechaRegistro:res.datafechaRegistro,
+                        fechaRegistro:res.data.fechaRegistro,
                         fechaInicio: res.data.fechaInicio,
                         fechaFin: res.data.fechaFin,
                         revisado: res.data.revisado,

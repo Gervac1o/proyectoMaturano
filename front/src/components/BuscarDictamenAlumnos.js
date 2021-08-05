@@ -117,8 +117,6 @@ render() {
                         <th className="table_lista, table_title">Nombre</th>
                         <th className="table_lista, table_title">Boleta</th>
                         <th className="table_lista, table_title">Programa Académico</th>
-                        <th className="table_lista, table_title">Semestre</th>
-                        <th className="table_lista, table_title">%</th>
                         <th className="table_lista, table_title">Estado de la Solicitud</th>
                         <th className="table_lista, table_title">Revisado por</th>
                     </tr>
@@ -134,11 +132,8 @@ render() {
                                                 <ObtenerAlumnoPorIdAlumno
                                                 idAlumno={dictamen.idAlumno}
                                                 />
-                                                <td className="table_lista">{dictamen.semestre}</td>
-                                                <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_new">NO REVISADO</a></td>
                                                 <td className="table_lista">NO REVISADO</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + dictamen.idAlumno} id="btn_watch">Ver Archivos</Link></td>
                                             </tr>
                                         </tbody>
                                         )
@@ -155,11 +150,8 @@ render() {
                                                 <ObtenerAlumnoPorIdAlumno
                                                 idAlumno={dictamen.idAlumno}
                                                 />
-                                                <td className="table_lista">{dictamen.semestre}</td>
-                                                <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_processing">EN PROCESO</a></td>
                                                 <td className="table_lista">{dictamen.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + dictamen.idAlumno} id="btn_watch">Ver Archivos</Link></td>
                                             </tr>
                                         </tbody>
                                         )
@@ -176,11 +168,8 @@ render() {
                                                 <ObtenerAlumnoPorIdAlumno
                                                 idAlumno={dictamen.idAlumno}
                                                 />
-                                                <td className="table_lista">{dictamen.semestre}</td>
-                                                <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_finished">FINALIZADO</a></td>
                                                 <td className="table_lista">{dictamen.revisado}</td>
-                                                <td><Link to={'/admmin/DirectorioArchivosAlumno/' + dictamen.idAlumno} id="btn_watch">Ver Archivos</Link></td>
                                             </tr>
                                         </tbody>
                                         )
@@ -201,7 +190,6 @@ render() {
                                                 <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista"><a id="state_rejected">RECHAZADO</a></td>
                                                 <td className="table_lista">{dictamen.revisado}</td>
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + dictamen.idAlumno} id="btn_watch">Ver Archivos</Link></td>
                                             </tr>
                                         </tbody>
                                         )
@@ -218,8 +206,6 @@ render() {
                                                 <ObtenerAlumnoPorIdAlumno
                                                 idAlumno={dictamen.idAlumno}
                                                 />
-                                                <td className="table_lista">{dictamen.semestre}</td>
-                                                <td className="table_lista">{dictamen.porcentajeCreditos}</td>
                                                 <td className="table_lista">{(() => {  
                                                         switch (dictamen.estado){
                                                         case "NUEVO":
@@ -258,7 +244,6 @@ render() {
                                                             break;
                                                         }
                                                     })()}
-                                                <td><Link to={'/admin/DirectorioArchivosAlumno/' + dictamen.idAlumno} id="btn_watch">Ver Archivos</Link></td>
                                             </tr>
                                         </tbody>
                                         )
